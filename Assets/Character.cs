@@ -33,6 +33,11 @@ public class Character : MonoBehaviour
 
     private void Start()
     {
+        //lets say , for now we run for 10 times or maybe untill everybody is gone
+        
+        // - should we know/track which goal/need each task relates to ?
+        
+        
         foreach (var task in regularGoapStrategy.GetActs(_needs, _actsRepo))
         {
             tasks.Add(task);
