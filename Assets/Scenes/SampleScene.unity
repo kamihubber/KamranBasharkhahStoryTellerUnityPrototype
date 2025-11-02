@@ -250,16 +250,16 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 845aacbcb0e2c034e9de9c6dbf96a898, type: 2}
   - {fileID: 11400000, guid: 40c65e954640af149ba87e84601ce7e3, type: 2}
   - {fileID: 11400000, guid: 89cb8042d731c054c9b8373ffd0628b4, type: 2}
-  _needs:
+  needsConfigs:
   - {fileID: 11400000, guid: a3c3bc8989a84f9429ba12279f26c0db, type: 2}
   - {fileID: 11400000, guid: 06426fdc87925ce4b9cabd237912d84b, type: 2}
   - {fileID: 11400000, guid: 6cbd497ea0392044fbc7607665b08355, type: 2}
-  needsFullfillDict:
-  - need: {fileID: 11400000, guid: a3c3bc8989a84f9429ba12279f26c0db, type: 2}
+  needsInitialValues:
+  - needConfig: {fileID: 11400000, guid: a3c3bc8989a84f9429ba12279f26c0db, type: 2}
+    amount: 8
+  - needConfig: {fileID: 11400000, guid: 06426fdc87925ce4b9cabd237912d84b, type: 2}
     amount: 0
-  - need: {fileID: 11400000, guid: 06426fdc87925ce4b9cabd237912d84b, type: 2}
-    amount: 0
-  - need: {fileID: 11400000, guid: 6cbd497ea0392044fbc7607665b08355, type: 2}
+  - needConfig: {fileID: 11400000, guid: 6cbd497ea0392044fbc7607665b08355, type: 2}
     amount: 0
 --- !u!4 &1051505684
 Transform:

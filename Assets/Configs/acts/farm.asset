@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: farming
   effects:
-  - need: {fileID: 11400000, guid: 06426fdc87925ce4b9cabd237912d84b, type: 2}
+  - needConfig: {fileID: 11400000, guid: 06426fdc87925ce4b9cabd237912d84b, type: 2}
     amount: 4
   wisdomFactor: 1
   actFactor: 1

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: date
   effects:
-  - need: {fileID: 11400000, guid: 6cbd497ea0392044fbc7607665b08355, type: 2}
+  - needConfig: {fileID: 11400000, guid: 6cbd497ea0392044fbc7607665b08355, type: 2}
     amount: 6
   wisdomFactor: 1
   actFactor: 1

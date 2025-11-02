@@ -6,13 +6,13 @@ using UnityEngine;
 
 public interface IGoaperStrategy
 {
-    public List<Act> GetActs(List<Need> needs, List<Act> _actsRepo);
+    public List<Act> GetActs(List<NeedConfig> needs, List<Act> _actsRepo, List<Need> characterNeeds);
 }
 
 [Serializable]
 public struct NeedFullFill
 {
-    public Need need;
+    public NeedConfig needConfig;
     public int amount;
 }
 public class Character : MonoBehaviour
@@ -21,7 +21,7 @@ public class Character : MonoBehaviour
     List<Act> _actsRepo = new List<Act>();
     
     [SerializeField]
-    List<Need> _needs = new List<Need>();
+    List<NeedConfig> needsConfigs = new List<NeedConfig>();
     
     List<Act> tasks = new List<Act>();
     
@@ -29,16 +29,30 @@ public class Character : MonoBehaviour
     RegularGoapStrategy regularGoapStrategy = new RegularGoapStrategy();
     
     [SerializeField]
-    List<NeedFullFill> needsFullfillDict = new List<NeedFullFill>();
+    List<Need> needs = new List<Need>();
+    
+    [SerializeField]
+    List<NeedFullFill> needsInitialValues = new List<NeedFullFill>();
 
     private void Start()
     {
         //lets say , for now we run for 10 times or maybe untill everybody is gone
-        
+        //
         // - should we know/track which goal/need each task relates to ?
         
+        //create needs based on configs
+        foreach (var _needConfig in needsConfigs)
+        {
+            Need newNeed = new Need()
+            {
+                FullFillAmount = needsInitialValues.Find(niv => niv.needConfig == _needConfig).amount,
+                config = _needConfig
+            };
+            
+            needs.Add(newNeed);
+        }
         
-        foreach (var task in regularGoapStrategy.GetActs(_needs, _actsRepo))
+        foreach (var task in regularGoapStrategy.GetActs(needsConfigs, _actsRepo, needs))
         {
             tasks.Add(task);
         }
@@ -46,6 +60,7 @@ public class Character : MonoBehaviour
         foreach (var task in tasks)
         {
             task.Log();
+            //todo : update on task done
             UpdateNeedsFullFillScores(task);
 
         }
@@ -55,8 +70,13 @@ public class Character : MonoBehaviour
     {
         foreach (var needEffect in task.effects)
         {
-            var nfl = needsFullfillDict.Find(nf => nf.need.name == needEffect.need.name);
-            nfl.amount += needEffect.amount;
+            var need = needs.Find(n => n.config == needEffect.needConfig);
+            need.FullFillAmount += needEffect.amount;
         }
+    }
+    
+    private bool isNeedFullfilled()
+    {
+        return false;
     }
 }

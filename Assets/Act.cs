@@ -7,7 +7,7 @@ using UnityEngine;
 [Serializable]
 public struct NeedEffect
 {
-   public Need need;
+   public NeedConfig needConfig;
    public int amount;
 }
 

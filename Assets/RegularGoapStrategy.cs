@@ -9,12 +9,13 @@ public class RegularGoapStrategy : IGoaperStrategy
     
     
     
-    public List<Act> GetActs(List<Need> needs, List<Act> _actsRepo)
+    public List<Act> GetActs(List<NeedConfig> needsConfigs, List<Act> _actsRepo, List<Need> characterNeeds)
     {
         List<Act> acts = new List<Act>();
 
         //how to know if we can do an act or we should first fullfill its requirements??
         
+        //-traits
         //- character initial need points -> select need
         //-character should call this strategy each frame but this should only update tasks if needed
         //-if an act has an active task then only change it if u have some special adjectives , like "u cant focus"
@@ -26,10 +27,21 @@ public class RegularGoapStrategy : IGoaperStrategy
         //- should we know / track which goal/need each task relates to ?
         //when character chnages the goal tasks again?
         
-        foreach (var need in needs)
+        var filteredNeedsConfigsForProcess = needsConfigs.Where(nc => ShouldProcessNeed(nc, characterNeeds)).ToList();
+
+        bool ShouldProcessNeed(NeedConfig needsConfig, List<Need> characterNeeds)
+        {
+            Need targetNeed = characterNeeds.Find(cn => cn.config == needsConfig);
+            
+            return targetNeed != null && targetNeed.FullFillAmount < 5;
+            
+            return false;
+        }
+        
+        foreach (var needConfig in filteredNeedsConfigsForProcess)
         {
             var possibleActsForThisNeed =
-                _actsRepo.Where(actr => actr.effects.Find(ne => ne.need == need).amount > 0);
+                _actsRepo.Where(actr => actr.effects.Find(ne => ne.needConfig == needConfig).amount > 0);
             
             //strategy
             //decide on adjectives, and scores

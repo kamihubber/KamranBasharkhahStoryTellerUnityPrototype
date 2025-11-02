@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: propose
   effects:
-  - need: {fileID: 11400000, guid: 6cbd497ea0392044fbc7607665b08355, type: 2}
+  - needConfig: {fileID: 11400000, guid: 6cbd497ea0392044fbc7607665b08355, type: 2}
     amount: 4
   wisdomFactor: 1
   actFactor: 1
