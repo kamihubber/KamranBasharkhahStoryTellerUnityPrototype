@@ -12,7 +12,7 @@ public struct NeedEffect
 }
 
 [CreateAssetMenu(menuName = "Act")]
-public class Act : ScriptableObject
+public class ActConfig : ScriptableObject
 {
    [SerializeField] private string name;
    
@@ -30,9 +30,9 @@ public class Act : ScriptableObject
 
    //todo : logic should not be here , this is config?
    
-   public void Log()
+   public void Log(string prefix)
    {
-      Debug.Log("i am doing " + name);
+      Debug.Log(prefix + " is doing " + name);
    }
 
 }

@@ -9,16 +9,18 @@ public class RegularGoapStrategy : IGoaperStrategy
     
     
     
-    public List<Act> GetActs(List<NeedConfig> needsConfigs, List<Act> _actsRepo, List<Need> characterNeeds)
+    public Dictionary<NeedConfig, ActConfig> GetActs(List<NeedConfig> needsConfigs, List<ActConfig> _actsRepo, List<Need> characterNeeds)
     {
-        List<Act> acts = new List<Act>();
+        Dictionary<NeedConfig, ActConfig> acts = new Dictionary<NeedConfig, ActConfig>();
 
         //how to know if we can do an act or we should first fullfill its requirements??
         
         //-traits
-        //- character initial need points -> select need
-        //-character should call this strategy each frame but this should only update tasks if needed
+        
+        //- character initial need points -> select need (done) //prospective base class feature
+        //- character should call this strategy each frame but this should only update tasks if needed
         //-if an act has an active task then only change it if u have some special adjectives , like "u cant focus"
+        
         //- act time
         //- task result/effect
         //- (learn after task result , experience)
@@ -48,7 +50,7 @@ public class RegularGoapStrategy : IGoaperStrategy
             //and then acts requirements (a kind of decomposition here??)
             int randomindex = UnityEngine.Random.Range(0, possibleActsForThisNeed.Count());
             
-            acts.Add(possibleActsForThisNeed.ElementAt(randomindex));
+            acts.Add(needConfig, possibleActsForThisNeed.ElementAt(randomindex));
         }
         
         return acts;

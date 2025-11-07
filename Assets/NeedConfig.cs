@@ -7,6 +7,10 @@ using UnityEngine;
 public class NeedConfig : ScriptableObject
 {
     [SerializeField] private string name;
+    
+    [SerializeField] private int fullFillMax;
+    
+    public int FullFillMax { get { return fullFillMax; } set { fullFillMax = value; } }
     //others
 }
 

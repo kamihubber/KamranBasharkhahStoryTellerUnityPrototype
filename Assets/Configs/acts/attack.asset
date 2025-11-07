@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: attack
   effects:
-  - needConfig: {fileID: 11400000, guid: a3c3bc8989a84f9429ba12279f26c0db, type: 2}
+  - needConfig: {fileID: 11400000, guid: a0e412d4a7b8f024b9b2cec9ad5b95f6, type: 2}
     amount: 4
   wisdomFactor: 1
   actFactor: 1

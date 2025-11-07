@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: eating
   effects:
-  - needConfig: {fileID: 11400000, guid: 06426fdc87925ce4b9cabd237912d84b, type: 2}
+  - needConfig: {fileID: 11400000, guid: 4d3e76e83da6f974fb59592272d1c2d0, type: 2}
     amount: 8
   wisdomFactor: 1
   actFactor: 1

@@ -1,0 +1,8 @@
+﻿- we can have "Mental Domain" and "Act Domain" both in technical and game design.
+- the concept of "obstacles" against any act step (specialy in a act chain toward the goal) 
+this can make the character to change its step or add another external step to its chain to first cope with that setback
+
+(- several intention goap -> the total result of all these intentions confrontations -> creates an act
+** this is briliant both technically and design BUT its also full simulation mode!) 
+also each intention can randomly result in an act before the total is determined 
+, and then the total also can or can not result to an act, this creates good level of randomness , emergant and reality .
