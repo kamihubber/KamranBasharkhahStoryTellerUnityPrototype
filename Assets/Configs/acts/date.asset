@@ -15,6 +15,6 @@ MonoBehaviour:
   name: date
   effects:
   - needConfig: {fileID: 11400000, guid: a11f0899458f36042afbf223e623ff27, type: 2}
-    amount: 6
+    amount: 0.3
   wisdomFactor: 1
   actFactor: 1

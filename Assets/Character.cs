@@ -76,8 +76,9 @@ public class Character : MonoBehaviour
     private void ProcessNeeds()
     {
         var needConfigsToUpdate = needsConfigs.Where(nd => tasks.Keys.Contains(nd) == false);
-        
-        foreach (var task in regularGoapStrategy.GetActs(needConfigsToUpdate.ToList(), _actsRepo, needs))
+
+        var goalTasks = regularGoapStrategy.GetActs(needConfigsToUpdate.ToList(), _actsRepo, needs);
+        foreach (var task in goalTasks)
         {
             tasks.Add(task.Key, task.Value);
         }

@@ -15,6 +15,6 @@ MonoBehaviour:
   name: farming
   effects:
   - needConfig: {fileID: 11400000, guid: 4d3e76e83da6f974fb59592272d1c2d0, type: 2}
-    amount: 4
+    amount: 0.1
   wisdomFactor: 1
   actFactor: 1

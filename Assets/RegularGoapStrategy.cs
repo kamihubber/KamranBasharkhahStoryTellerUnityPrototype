@@ -29,6 +29,7 @@ public class RegularGoapStrategy : IGoaperStrategy
         //- should we know / track which goal/need each task relates to ?
         //when character chnages the goal tasks again?
         
+        //probably should be filtered in character class
         var filteredNeedsConfigsForProcess = needsConfigs.Where(nc => ShouldProcessNeed(nc, characterNeeds)).ToList();
 
         bool ShouldProcessNeed(NeedConfig needsConfig, List<Need> characterNeeds)

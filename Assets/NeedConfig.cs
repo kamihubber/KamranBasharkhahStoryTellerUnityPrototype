@@ -18,9 +18,9 @@ public class Need
 {
     public NeedConfig config;
 
-    private int fullFillAmount;
+    private float fullFillAmount;
 
-    public int FullFillAmount
+    public float FullFillAmount
     {
         get { return fullFillAmount; }
         set { fullFillAmount = value; }

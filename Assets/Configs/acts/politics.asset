@@ -15,6 +15,6 @@ MonoBehaviour:
   name: do politics
   effects:
   - needConfig: {fileID: 11400000, guid: a0e412d4a7b8f024b9b2cec9ad5b95f6, type: 2}
-    amount: 6
+    amount: 0.5
   wisdomFactor: 1
   actFactor: 1

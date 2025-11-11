@@ -8,7 +8,7 @@ using UnityEngine;
 public struct NeedEffect
 {
    public NeedConfig needConfig;
-   public int amount;
+   public float amount;
 }
 
 [CreateAssetMenu(menuName = "Act")]
