@@ -16,15 +16,21 @@ public class RegularGoapStrategy : IGoaperStrategy
         //how to know if we can do an act or we should first fullfill its requirements??
         
         //-traits
-        
-        //- character initial need points -> select need (done) //prospective base class feature
-        //- character should call this strategy each frame but this should only update tasks if needed
         //-if an act has an active task then only change it if u have some special adjectives , like "u cant focus"
+        
+        // - act target(people,objects)
+        // - Radius(act or anything)
+        
+        //Done- character initial need points -> select need (done) //prospective base class feature
+        //Done- character should call this strategy each frame but this should only update tasks if needed(done)
         
         //- act time
         //- task result/effect
+        
         //- (learn after task result , experience)
+        
         //- (idealogy over adjective)
+        
         //- maybe we should check not to duplicate handled needs tasks
         //- should we know / track which goal/need each task relates to ?
         //when character chnages the goal tasks again?
