@@ -18,3 +18,5 @@ MonoBehaviour:
     amount: 0.1
   wisdomFactor: 1
   actFactor: 1
+  requiredActs:
+  - {fileID: 11400000, guid: ef226a96889ff574ba0dd703d83a43db, type: 2}

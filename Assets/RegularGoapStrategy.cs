@@ -12,6 +12,10 @@ public class RegularGoapStrategy : IGoaperStrategy
     public Dictionary<NeedConfig, ActConfig> GetActs(List<NeedConfig> needsConfigs, List<ActConfig> _actsRepo, List<Need> characterNeeds)
     {
         Dictionary<NeedConfig, ActConfig> acts = new Dictionary<NeedConfig, ActConfig>();
+        
+        //negative,minus effect amounts on needs -> releasing current act for critical need
+        //(create act need dynamically ?)
+        //the need effects of subacts can be parent acts ?
 
         //how to know if we can do an act or we should first fullfill its requirements??
         

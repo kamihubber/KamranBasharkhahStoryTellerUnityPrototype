@@ -27,12 +27,29 @@ public class ActConfig : ScriptableObject
    
    [SerializeField]
    private int actFactor = 1;
+   
+   //create act need dynamically ?
+   [SerializeField]
+   List<ActConfig> requiredActs = new List<ActConfig>();
 
    //todo : logic should not be here , this is config?
    
    public void Log(string prefix)
    {
+      ProcessSubActs(prefix);
       Debug.Log(prefix + " is doing " + name);
+   }
+
+   public void ProcessSubActs(string prefix)
+   {
+      if (requiredActs.Count > 0)
+      {
+         foreach (var subact in requiredActs)
+         {
+            subact.ProcessSubActs(prefix);
+            Debug.Log(prefix + " is doing " + subact.name + " in order to prepare for " + name);
+         }
+      }
    }
 
 }

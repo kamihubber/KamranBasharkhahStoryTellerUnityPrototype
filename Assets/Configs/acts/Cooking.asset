@@ -10,13 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 878e1f0fcb47b2842bc8a2576028d7d8, type: 3}
-  m_Name: Eat
+  m_Name: Cooking
   m_EditorClassIdentifier: 
-  name: eating
-  effects:
-  - needConfig: {fileID: 11400000, guid: 4d3e76e83da6f974fb59592272d1c2d0, type: 2}
-    amount: 0.4
+  name: Cooking
+  effects: []
   wisdomFactor: 1
   actFactor: 1
   requiredActs:
-  - {fileID: 11400000, guid: aac12c2a992e5f64ab73a8ef110d49b6, type: 2}
+  - {fileID: 11400000, guid: a29aef88693f4e34cbe7f4fac6fba20d, type: 2}
