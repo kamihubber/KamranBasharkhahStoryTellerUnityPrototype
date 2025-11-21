@@ -57,11 +57,13 @@ public class Character : MonoBehaviour
             
             needs.Add(newNeed);
         }
+        
+        ProcessNeeds();
     }
 
     private void Update()
     {
-        ProcessNeeds();
+        //ProcessNeeds();
     }
     
     bool ShouldProcessNeed(NeedConfig needsConfig, List<Need> characterNeeds)
@@ -73,7 +75,7 @@ public class Character : MonoBehaviour
         return false;
     }
 
-    private void ProcessNeeds()
+    private async void ProcessNeeds()
     {
         var needConfigsToUpdate = needsConfigs.Where(nd => tasks.Keys.Contains(nd) == false);
 
@@ -85,7 +87,7 @@ public class Character : MonoBehaviour
 
         foreach (var task in tasks)
         {
-            task.Value.Log(name);
+            await task.Value.Log(name);
             //todo : update on task done
             UpdateNeedsFullFillScores(task.Value);
         }

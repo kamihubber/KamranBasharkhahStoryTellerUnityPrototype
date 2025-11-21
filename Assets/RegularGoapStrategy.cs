@@ -7,11 +7,14 @@ public class RegularGoapStrategy : IGoaperStrategy
 {
     //think , experience, ...
     
-    
-    
     public Dictionary<NeedConfig, ActConfig> GetActs(List<NeedConfig> needsConfigs, List<ActConfig> _actsRepo, List<Need> characterNeeds)
     {
         Dictionary<NeedConfig, ActConfig> acts = new Dictionary<NeedConfig, ActConfig>();
+        
+        //subact improve, fullfill of parent (2 factor system or need effect style for parent)
+        //acts time (test)
+        //subacts process order
+        //needs priority, energy , time , ...
         
         //negative,minus effect amounts on needs -> releasing current act for critical need
         //(create act need dynamically ?)
