@@ -11,8 +11,16 @@ public class RegularGoapStrategy : IGoaperStrategy
     {
         Dictionary<NeedConfig, ActConfig> acts = new Dictionary<NeedConfig, ActConfig>();
         
-        //needs for needs
-        //needs for acts
+        //refactor?
+        //task time issue?
+        
+        //subtasks does not effect needs now,we may need to pull subact
+        //code from act and instead add subacts to output here
+        
+        //needs for acts,can this help with scoring problem ?
+        //everything needs energy style?which maks people seek acts and objects which ahve nergy...
+        //(needs for needs)
+        
         //objects for acts,needs?
         ////create act need dynamically ?
         
