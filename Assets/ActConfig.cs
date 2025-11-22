@@ -102,20 +102,20 @@ public class ActConfig : ScriptableObject
       // Perform this act over a random time
       if (_parentAct != null)
       {
-         //Debug.Log($"{prefix} is doing {name} in order to prepare for {_parentAct.name}");
+         Debug.Log($"{prefix} is doing {name} in order to prepare for {_parentAct.name}");
          
-         float duration = Random.Range(1f, 2f); // seconds
-         float progress = 0f;
-         
-         while (progress < 1f)
-         {
-            token.ThrowIfCancellationRequested();
-         
-            Debug.Log($"{prefix} is doing {name} in order to prepare for {_parentAct.name}");
-         
-            progress += Time.deltaTime / duration;
-            await Task.Yield(); // returns control but continues loop
-         }
+         // float duration = Random.Range(1f, 2f); // seconds
+         // float progress = 0f;
+         //
+         // while (progress < 1f)
+         // {
+         //    token.ThrowIfCancellationRequested();
+         //
+         //    Debug.Log($"{prefix} is doing {name} in order to prepare for {_parentAct.name}");
+         //
+         //    progress += Time.deltaTime / duration;
+         //    await Task.Yield(); // returns control but continues loop
+         // }
       }
    }
 

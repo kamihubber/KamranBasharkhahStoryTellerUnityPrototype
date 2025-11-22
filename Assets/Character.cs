@@ -40,6 +40,8 @@ public class Character : MonoBehaviour
     [SerializeField]
     List<NeedFullFill> needsInitialValues = new List<NeedFullFill>();
 
+    public List<Need> Needs => needs;
+
     private void Start()
     {
         //lets say , for now we run for 10 times or maybe untill everybody is gone
@@ -55,15 +57,15 @@ public class Character : MonoBehaviour
                 config = _needConfig
             };
             
-            needs.Add(newNeed);
+            Needs.Add(newNeed);
         }
         
-        ProcessNeeds();
+        //ProcessNeeds();
     }
 
     private void Update()
     {
-        //ProcessNeeds();
+        ProcessNeeds();
     }
     
     bool ShouldProcessNeed(NeedConfig needsConfig, List<Need> characterNeeds)
@@ -79,7 +81,7 @@ public class Character : MonoBehaviour
     {
         var needConfigsToUpdate = needsConfigs.Where(nd => tasks.Keys.Contains(nd) == false);
 
-        var goalTasks = regularGoapStrategy.GetActs(needConfigsToUpdate.ToList(), _actsRepo, needs);
+        var goalTasks = regularGoapStrategy.GetActs(needConfigsToUpdate.ToList(), _actsRepo, Needs);
         foreach (var task in goalTasks)
         {
             tasks.Add(task.Key, task.Value);
@@ -110,7 +112,7 @@ public class Character : MonoBehaviour
     {
         foreach (var needEffect in task.effects)
         {
-            var need = needs.Find(n => n.config == needEffect.needConfig);
+            var need = Needs.Find(n => n.config == needEffect.needConfig);
             need.FullFillAmount += needEffect.amount;
         }
     }
@@ -118,7 +120,7 @@ public class Character : MonoBehaviour
     void UpdateTasksState(KeyValuePair<NeedConfig, ActConfig> task)
     {
         //
-        var need = needs.Find(n => n.config == task.Key);
+        var need = Needs.Find(n => n.config == task.Key);
         if (isNeedFullfilled(need))
             tasksToDelete.Add(task.Key, task.Value);
     }
