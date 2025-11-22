@@ -11,6 +11,11 @@ public class RegularGoapStrategy : IGoaperStrategy
     {
         Dictionary<NeedConfig, ActConfig> acts = new Dictionary<NeedConfig, ActConfig>();
         
+        //needs for needs
+        //needs for acts
+        //objects for acts,needs?
+        ////create act need dynamically ?
+        
         //subact improve, fullfill of parent (2 factor system or need effect style for parent)
         //acts time (test)
         //subacts process order

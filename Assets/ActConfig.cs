@@ -41,8 +41,6 @@ public class ActConfig : ScriptableObject
       get => _parentAct;
       set => _parentAct = value;
    }
-   
-   private CancellationTokenSource cts = new();
 
    //todo : logic should not be here , this is config?
    
@@ -53,47 +51,14 @@ public class ActConfig : ScriptableObject
    }
 
    private ActConfig _parentAct;
-
-   // public async Task ProcessSubActs(string prefix)
-   // {
-   //    var token = cts.Token;
-   //    
-   //    if (requiredActs.Count > 0)
-   //    {
-   //       foreach (var subact in requiredActs)
-   //       {
-   //          token.ThrowIfCancellationRequested();
-   //          subact.ParentAct = this;
-   //          await subact.ProcessSubActs(prefix);
-   //          //await subact.Log(prefix);
-   //       }
-   //    }
-   //    //else
-   //    {
-   //       // float progress = 0;
-   //       // var time = Random.Range(2000, 5000);
-   //       // float duration = time / 1000f;
-   //       // while (progress < 1)
-   //       // {
-   //       //    Debug.Log(prefix + " is doing " + name + " in order to prepare for " + _parentAct.name);
-   //       //    progress = ((1 * Time.deltaTime) / duration);
-   //       //    await Task.Yield();
-   //       // }
-   //       if (_parentAct != null)
-   //         Debug.Log(prefix + " is doing " + name + " in order to prepare for " + _parentAct.name);
-   //    }
-   // }
    
    public async Task ProcessSubActs(string prefix)
    {
-      var token = cts.Token;
-
       // Process sub acts
       if (requiredActs.Count > 0)
       {
          foreach (var subact in requiredActs)
          {
-            token.ThrowIfCancellationRequested();
             subact.ParentAct = this;
             await subact.ProcessSubActs(prefix);
          }
