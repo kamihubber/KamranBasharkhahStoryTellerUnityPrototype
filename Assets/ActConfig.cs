@@ -35,16 +35,50 @@ public class ActConfig : ScriptableObject
    //create act need dynamically ?
    [SerializeField]
    List<ActConfig> requiredActs = new List<ActConfig>();
+   
 
-   public ActConfig ParentAct
+   //todo : logic should not be here , this is config?
+   public List<ActConfig> RequiredActs => requiredActs;
+}
+
+
+public class Act
+{
+   public ActConfig config;
+
+   [SerializeField] private string name;
+   
+   //create act need dynamically ?
+   [SerializeField]
+   List<Act> requiredActs = new List<Act>();
+   
+   private Act _parentAct;
+
+   public Act ParentAct
    {
       get => _parentAct;
       set => _parentAct = value;
    }
+   
+   public event Action<Act> OnActDone;
 
-   //todo : logic should not be here , this is config?
+   public Act(ActConfig config, string name, Act parentAct)
+   {
+      this.config = config;
+      this.name = name;
+      _parentAct = parentAct;
 
-   public event Action<ActConfig> OnActDone; 
+      if (config.RequiredActs != null && config.RequiredActs.Count > 0)
+      {
+         foreach (var subActConfig in config.RequiredActs)
+         {
+            var subact = new Act(subActConfig, subActConfig.name, this);
+            requiredActs.Add(subact);
+         }
+      }
+     
+   }
+   
    
    public async Task Log(string prefix)
    {
@@ -52,7 +86,7 @@ public class ActConfig : ScriptableObject
       
       //if log
       if (_parentAct == null)
-        Debug.Log(prefix + " is doing " + name);
+         Debug.Log(prefix + " is doing " + name);
       else
       {
          Debug.Log($"{prefix} is doing {name} in order to prepare for {_parentAct.name}");
@@ -61,8 +95,6 @@ public class ActConfig : ScriptableObject
       
       OnActDone.Invoke(this);
    }
-
-   private ActConfig _parentAct;
    
    public async Task ProcessSubActs(string prefix)
    {
@@ -77,6 +109,5 @@ public class ActConfig : ScriptableObject
          }
       }
    }
-
 
 }

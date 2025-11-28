@@ -8,7 +8,7 @@ using UnityEngine;
 public interface IGoaperStrategy
 {
     //decomposition : obstacles strategy?
-    public Dictionary<NeedConfig, ActConfig> GetActs(List<NeedConfig> needs, List<ActConfig> _actsRepo, List<Need> characterNeeds);
+    public Dictionary<NeedConfig, Act> GetActs(List<NeedConfig> needs, List<ActConfig> _actsRepo, List<Need> characterNeeds);
 }
 
 [Serializable]
@@ -27,9 +27,9 @@ public class Character : MonoBehaviour
     [SerializeField]
     List<NeedConfig> needsConfigs = new List<NeedConfig>();
     
-    Dictionary<NeedConfig, ActConfig> tasks = new Dictionary<NeedConfig, ActConfig>();
+    Dictionary<NeedConfig, Act> tasks = new Dictionary<NeedConfig, Act>();
     
-    Dictionary<NeedConfig, ActConfig> tasksToDelete = new Dictionary<NeedConfig, ActConfig>();
+    Dictionary<NeedConfig, Act> tasksToDelete = new Dictionary<NeedConfig, Act>();
     
     //todo : interface
     RegularGoapStrategy regularGoapStrategy = new RegularGoapStrategy();
@@ -111,16 +111,16 @@ public class Character : MonoBehaviour
         }
     }
 
-    private void UpdateNeedsFullFillScores(ActConfig task)
+    private void UpdateNeedsFullFillScores(Act task)
     {
-        foreach (var needEffect in task.effects)
+        foreach (var needEffect in task.config.effects)
         {
             var need = Needs.Find(n => n.config == needEffect.needConfig);
             need.FullFillAmount += needEffect.amount;
         }
     }
 
-    void UpdateTasksState(KeyValuePair<NeedConfig, ActConfig> task)
+    void UpdateTasksState(KeyValuePair<NeedConfig, Act> task)
     {
         //
         var need = Needs.Find(n => n.config == task.Key);

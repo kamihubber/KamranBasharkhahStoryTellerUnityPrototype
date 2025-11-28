@@ -7,9 +7,9 @@ public class RegularGoapStrategy : IGoaperStrategy
 {
     //think , experience, ...
     
-    public Dictionary<NeedConfig, ActConfig> GetActs(List<NeedConfig> needsConfigs, List<ActConfig> _actsRepo, List<Need> characterNeeds)
+    public Dictionary<NeedConfig, Act> GetActs(List<NeedConfig> needsConfigs, List<ActConfig> _actsRepo, List<Need> characterNeeds)
     {
-        Dictionary<NeedConfig, ActConfig> acts = new Dictionary<NeedConfig, ActConfig>();
+        Dictionary<NeedConfig, Act> acts = new Dictionary<NeedConfig, Act>();
         
         //refactor?
         //task time issue?
@@ -26,10 +26,10 @@ public class RegularGoapStrategy : IGoaperStrategy
         //objects for acts,needs?
         ////create act need dynamically ?
         
-        //subact improve, fullfill of parent (2 factor system or need effect style for parent)
-        //acts time (test)
         //subacts process order
         //needs priority, energy , time , ...
+        
+        //subact improve, fullfill of parent (2 factor system or need effect style for parent) (done for now)
         
         //negative,minus effect amounts on needs -> releasing current act for critical need
         //(create act need dynamically ?)
@@ -78,8 +78,11 @@ public class RegularGoapStrategy : IGoaperStrategy
             //decide on adjectives, and scores
             //and then acts requirements (a kind of decomposition here??)
             int randomindex = UnityEngine.Random.Range(0, possibleActsForThisNeed.Count());
+
+            ActConfig actConfig = possibleActsForThisNeed.ElementAt(randomindex);
+            Act act = new Act(actConfig, actConfig.name, null);
             
-            acts.Add(needConfig, possibleActsForThisNeed.ElementAt(randomindex));
+            acts.Add(needConfig, act);
         }
         
         return acts;
