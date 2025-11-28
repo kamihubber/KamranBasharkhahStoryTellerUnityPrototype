@@ -21,6 +21,8 @@ public class RegularGoapStrategy : IGoaperStrategy
         //everything needs energy style?which maks people seek acts and objects which ahve nergy...
         //(needs for needs)
         
+        //distraction
+        
         //objects for acts,needs?
         ////create act need dynamically ?
         
