@@ -89,13 +89,16 @@ public class Character : MonoBehaviour
 
         foreach (var task in tasks)
         {
+            task.Value.OnActDone -= UpdateNeedsFullFillScores;
+            task.Value.OnActDone += UpdateNeedsFullFillScores;
             await task.Value.Log(name);
             //todo : update on task done
-            UpdateNeedsFullFillScores(task.Value);
+            //UpdateNeedsFullFillScores(task.Value);
         }
 
         if ((tasks != null) && (tasks.Count > 0))
         {
+            tasksToDelete.Clear();
             foreach (var task in tasks)
             {
                 UpdateTasksState(task);
@@ -129,6 +132,5 @@ public class Character : MonoBehaviour
     {
         var config = needsConfigs.Find(nc => nc == need.config);
         return config.FullFillMax <= need.FullFillAmount;
-        return false;
     }
 }

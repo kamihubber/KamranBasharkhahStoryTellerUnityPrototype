@@ -43,11 +43,23 @@ public class ActConfig : ScriptableObject
    }
 
    //todo : logic should not be here , this is config?
+
+   public event Action<ActConfig> OnActDone; 
    
    public async Task Log(string prefix)
    {
       await ProcessSubActs(prefix);
-      Debug.Log(prefix + " is doing " + name);
+      
+      //if log
+      if (_parentAct == null)
+        Debug.Log(prefix + " is doing " + name);
+      else
+      {
+         Debug.Log($"{prefix} is doing {name} in order to prepare for {_parentAct.name}");
+      }
+      //
+      
+      OnActDone.Invoke(this);
    }
 
    private ActConfig _parentAct;
@@ -60,27 +72,9 @@ public class ActConfig : ScriptableObject
          foreach (var subact in requiredActs)
          {
             subact.ParentAct = this;
-            await subact.ProcessSubActs(prefix);
+            subact.OnActDone = OnActDone;
+            await subact.Log(prefix);
          }
-      }
-
-      // Perform this act over a random time
-      if (_parentAct != null)
-      {
-         Debug.Log($"{prefix} is doing {name} in order to prepare for {_parentAct.name}");
-         
-         // float duration = Random.Range(1f, 2f); // seconds
-         // float progress = 0f;
-         //
-         // while (progress < 1f)
-         // {
-         //    token.ThrowIfCancellationRequested();
-         //
-         //    Debug.Log($"{prefix} is doing {name} in order to prepare for {_parentAct.name}");
-         //
-         //    progress += Time.deltaTime / duration;
-         //    await Task.Yield(); // returns control but continues loop
-         // }
       }
    }
 
