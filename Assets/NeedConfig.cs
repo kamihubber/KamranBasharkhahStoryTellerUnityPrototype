@@ -11,6 +11,8 @@ public class NeedConfig : ScriptableObject
     [SerializeField] private int fullFillMax;
     
     public int FullFillMax { get { return fullFillMax; } set { fullFillMax = value; } }
+
+    public string Name => name;
     //others
 }
 

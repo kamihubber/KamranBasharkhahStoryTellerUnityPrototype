@@ -32,6 +32,9 @@ public class DashboardHandler : MonoBehaviour
     
     [SerializeField]
     Text actsText;
+    
+    [SerializeField]
+    ActsLogger actsLogger;
 
     // Start is called before the first frame update
     void Start()
@@ -52,6 +55,24 @@ public class DashboardHandler : MonoBehaviour
             needsNames[h].text = need.config.name;
             needsValues[h].text = need.FullFillAmount.ToString();
             h++;
+        }
+
+        foreach (var task in currentChar.Tasks)
+        {
+            string output = currentChar.GetComponent<Character>().Name + " is doing " + task.Value.Name + " for " + task.Key.Name;
+
+            if (task.Value.RequiredActs != null)
+            {
+                if (task.Value.RequiredActs.Count > 0)
+                {
+                    foreach (var subAct in task.Value.RequiredActs)
+                    {
+                        output += "\n" + "  - " + subAct.Name + " for " + task.Value.Name; ;
+                    }
+                }
+            }
+            
+            actsLogger.AddLine(output);
         }
     }
 }

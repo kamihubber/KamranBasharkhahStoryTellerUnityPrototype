@@ -42,6 +42,10 @@ public class Character : MonoBehaviour
 
     public List<Need> Needs => needs;
 
+    public Dictionary<NeedConfig, Act> Tasks => tasks;
+
+    public string Name => name;
+
     private void Start()
     {
         //lets say , for now we run for 10 times or maybe untill everybody is gone

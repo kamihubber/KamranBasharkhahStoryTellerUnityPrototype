@@ -11,28 +11,32 @@ public class RegularGoapStrategy : IGoaperStrategy
     {
         Dictionary<NeedConfig, Act> acts = new Dictionary<NeedConfig, Act>();
         
-        //refactor?
-        //task time issue?
+        //we are trying to reach interactions frist , we use static style for rapid test
+        //( ** maybe , add a feature , some subacts cant be sarted untill their requirements are met)
+        //interactions , targeting
+        //objects
         
-        //subtasks does not effect needs now,we may need to pull subact
-        //code from act and instead add subacts to output here
+        //traits
         
-        //needs for acts,can this help with scoring problem ?
-        //everything needs energy style?which maks people seek acts and objects which ahve nergy...
-        //(needs for needs)
+        //dashborad improve
         
         //distraction
         
         //objects for acts,needs?
         ////create act need dynamically ?
         
+        //(subtasks does not effect needs now,we may need to pull subact
+        //code from act and instead add subacts to output here)
+        
+        //(needs for needs)
+        
         //subacts process order
         //needs priority, energy , time , ...
         
         //subact improve, fullfill of parent (2 factor system or need effect style for parent) (done for now)
         
-        //negative,minus effect amounts on needs -> releasing current act for critical need
-        //(create act need dynamically ?)
+        //(everything needs energy style?which maks people seek acts and objects which have energy...)
+        
         //the need effects of subacts can be parent acts ?
 
         //how to know if we can do an act or we should first fullfill its requirements??
@@ -47,15 +51,12 @@ public class RegularGoapStrategy : IGoaperStrategy
         //Done- character should call this strategy each frame but this should only update tasks if needed(done)
         
         //- act time
+        //task time issue?
         //- task result/effect
         
         //- (learn after task result , experience)
         
         //- (idealogy over adjective)
-        
-        //- maybe we should check not to duplicate handled needs tasks
-        //- should we know / track which goal/need each task relates to ?
-        //when character chnages the goal tasks again?
         
         //probably should be filtered in character class
         var filteredNeedsConfigsForProcess = needsConfigs.Where(nc => ShouldProcessNeed(nc, characterNeeds)).ToList();

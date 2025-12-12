@@ -59,7 +59,11 @@ public class Act
       get => _parentAct;
       set => _parentAct = value;
    }
-   
+
+   public string Name => name;
+
+   public List<Act> RequiredActs => requiredActs;
+
    public event Action<Act> OnActDone;
 
    public Act(ActConfig config, string name, Act parentAct)
