@@ -13,8 +13,17 @@ public class RegularGoapStrategy : IGoaperStrategy
         
         //we are trying to reach interactions frist , we use static style for rapid test
         //( ** maybe , add a feature , some subacts cant be sarted untill their requirements are met)
+        
+        
         //interactions , targeting
-        //objects
+          //we look for (components of ) what we seek , in every thing , people , objects , things , events , moments ..... 
+          //objects
+        
+        //subact -> provide skill/factor -> fullfill parent act
+        //after interactions,targeting and objects , we might add
+        //add something like skill or grading among acts
+        //acts might provide some other factors than needs
+        //inorder to fullfill their parent act
         
         //traits
         

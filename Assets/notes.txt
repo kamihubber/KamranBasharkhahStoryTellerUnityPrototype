@@ -1,0 +1,17 @@
+﻿1/23/2026 
+dynamic method 
+- how to have an "output" for each act with a "Score toward Goal" ?
+ - we choose an act -> evalute output
+ 
+ semi static
+ 
+  - need -> header act -> requirements 
+    - requirements -> direct/indriect grade toward need
+                   -> direct/indirect grade twoard header act
+                   +-> direct/indirect grade toward group/factor
+                      -- factors like : domain , principles (wisodm,experience) , ...
+                      
+                      
+  semi static (current)
+   - header acts + requirements + (stay until provided) + 
+      (requirements for requirements) + (tags,groups)
