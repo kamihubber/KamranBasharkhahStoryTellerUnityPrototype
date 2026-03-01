@@ -1248,15 +1248,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 89cb8042d731c054c9b8373ffd0628b4, type: 2}
   needsConfigs:
   - {fileID: 11400000, guid: a0e412d4a7b8f024b9b2cec9ad5b95f6, type: 2}
-  - {fileID: 11400000, guid: 4d3e76e83da6f974fb59592272d1c2d0, type: 2}
-  - {fileID: 11400000, guid: a11f0899458f36042afbf223e623ff27, type: 2}
   needsInitialValues:
   - needConfig: {fileID: 11400000, guid: a0e412d4a7b8f024b9b2cec9ad5b95f6, type: 2}
     amount: 1
-  - needConfig: {fileID: 11400000, guid: 4d3e76e83da6f974fb59592272d1c2d0, type: 2}
-    amount: 50
-  - needConfig: {fileID: 11400000, guid: a11f0899458f36042afbf223e623ff27, type: 2}
-    amount: 50
 --- !u!4 &1051505684
 Transform:
   m_ObjectHideFlags: 0

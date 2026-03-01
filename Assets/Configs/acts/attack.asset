@@ -16,9 +16,9 @@ MonoBehaviour:
   effects:
   - needConfig: {fileID: 11400000, guid: a0e412d4a7b8f024b9b2cec9ad5b95f6, type: 2}
     amount: 0.2
-  - needConfig: {fileID: 11400000, guid: 4d3e76e83da6f974fb59592272d1c2d0, type: 2}
-    amount: -2
   wisdomFactor: 1
   actFactor: 1
   requiredActs:
   - {fileID: 11400000, guid: fab6daf8166bc934db7fd6d85545848a, type: 2}
+  requiredTimeSeconds: 1
+  fullFillAmount: 1

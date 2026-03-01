@@ -39,6 +39,13 @@ public class ActConfig : ScriptableObject
 
    //todo : logic should not be here , this is config?
    public List<ActConfig> RequiredActs => requiredActs;
+
+   public float RequiredTimeSeconds => requiredTimeSeconds;
+
+   public float FullFillAmount => fullFillAmount;
+
+   [SerializeField] private float requiredTimeSeconds;
+   [SerializeField] private float fullFillAmount;
 }
 
 
@@ -64,7 +71,14 @@ public class Act
 
    public List<Act> RequiredActs => requiredActs;
 
+   public bool IsFailed => _isFailed;
+
    public event Action<Act> OnActDone;
+   public event Action<Act> OnActFailed;
+   public bool _isFailed;
+
+   private float _requiredJobTimeSeconds;
+   private float _fullFillAmount;
 
    public Act(ActConfig config, string name, Act parentAct)
    {
@@ -77,27 +91,55 @@ public class Act
          foreach (var subActConfig in config.RequiredActs)
          {
             var subact = new Act(subActConfig, subActConfig.name, this);
+            subact.OnActFailed += OnActFailed;
             requiredActs.Add(subact);
          }
       }
      
    }
+
+   private void HandleActFailed(Act subact)
+   {
+      _isFailed = true;
+      OnActFailed.Invoke(this);
+   }
+
+   public bool IsFullfilled()
+   {
+      return _fullFillAmount >= config.FullFillAmount;
+   }
    
    
    public async Task Log(string prefix)
    {
-      await ProcessSubActs(prefix);
+      if (_isFailed)
+         return;
       
-      //if log
-      if (_parentAct == null)
-         Debug.Log(prefix + " is doing " + name);
+      await ProcessSubActs(prefix);
+
+      while (_requiredJobTimeSeconds < config.RequiredTimeSeconds)
+      {
+         //if log
+         if (_parentAct == null)
+            Debug.Log(prefix + " is doing " + name);
+         else
+         {
+            Debug.Log($"{prefix} is doing {name} in order to prepare for {_parentAct.name}");
+         }
+         //
+         
+         _requiredJobTimeSeconds += Time.deltaTime;
+         // 0.001 can be an effort parameter for fail
+         _fullFillAmount += Time.deltaTime * 10f;
+      }
+
+      if (IsFullfilled())
+        OnActDone.Invoke(this);
       else
       {
-         Debug.Log($"{prefix} is doing {name} in order to prepare for {_parentAct.name}");
+         _isFailed = true;
+         OnActFailed.Invoke(this);
       }
-      //
-      
-      OnActDone.Invoke(this);
    }
    
    public async Task ProcessSubActs(string prefix)
@@ -107,6 +149,9 @@ public class Act
       {
          foreach (var subact in requiredActs)
          {
+            if (subact.IsFullfilled())
+               return;
+            
             subact.ParentAct = this;
             subact.OnActDone = OnActDone;
             await subact.Log(prefix);

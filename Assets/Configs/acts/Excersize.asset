@@ -19,3 +19,5 @@ MonoBehaviour:
   wisdomFactor: 1
   actFactor: 1
   requiredActs: []
+  requiredTimeSeconds: 5
+  fullFillAmount: 30

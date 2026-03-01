@@ -93,11 +93,15 @@ public class Character : MonoBehaviour
 
         foreach (var task in tasks)
         {
-            task.Value.OnActDone -= UpdateNeedsFullFillScores;
-            task.Value.OnActDone += UpdateNeedsFullFillScores;
+            task.Value.OnActDone -= OnActDone;
+            task.Value.OnActDone += OnActDone;
+            
+            task.Value.OnActFailed -= OnActFailed;
+            task.Value.OnActFailed += OnActFailed;
+            
             await task.Value.Log(name);
             //todo : update on task done
-            //UpdateNeedsFullFillScores(task.Value);
+            UpdateNeedsFullFillScores(task.Value);
         }
 
         if ((tasks != null) && (tasks.Count > 0))
@@ -115,8 +119,28 @@ public class Character : MonoBehaviour
         }
     }
 
+    private void OnActDone(Act task)
+    {
+        if (task.ParentAct == null)
+        {
+            //UpdateNeedsFullFillScores(task);
+        }
+        else
+        {
+           
+        }
+    }
+
+    private void OnActFailed(Act task)
+    {
+        Debug.Log($"OnActFailed: {task.Name}");
+    }
+
     private void UpdateNeedsFullFillScores(Act task)
     {
+        if (task._isFailed)
+            return;
+        
         foreach (var needEffect in task.config.effects)
         {
             var need = Needs.Find(n => n.config == needEffect.needConfig);
