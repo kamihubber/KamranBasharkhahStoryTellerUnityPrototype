@@ -22,3 +22,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fab6daf8166bc934db7fd6d85545848a, type: 2}
   requiredTimeSeconds: 1
   fullFillAmount: 1
+  requiredSkills:
+  - skillName: swordfight
+    skillLevel: 2
+    skillType: 0

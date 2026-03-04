@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Helpers;
 using UnityEngine;
 
@@ -11,13 +12,18 @@ public interface IGoaperStrategy
     public Dictionary<NeedConfig, Act> GetActs(List<NeedConfig> needs, List<ActConfig> _actsRepo, List<Need> characterNeeds);
 }
 
+public interface IEntity
+{
+    
+}
+
 [Serializable]
 public struct NeedFullFill
 {
     public NeedConfig needConfig;
     public int amount;
 }
-public class Character : MonoBehaviour
+public class Character : MonoBehaviour, IEntity
 {
     [SerializeField] private string name;
     
@@ -45,6 +51,8 @@ public class Character : MonoBehaviour
     public Dictionary<NeedConfig, Act> Tasks => tasks;
 
     public string Name => name;
+
+    [SerializeField] private List<SkillComp> skills;
 
     private void Start()
     {
@@ -98,6 +106,15 @@ public class Character : MonoBehaviour
             
             task.Value.OnActFailed -= OnActFailed;
             task.Value.OnActFailed += OnActFailed;
+            
+            //await skills
+            var gainSkillsResult = await GainSkills(task.Value);
+
+            if (gainSkillsResult == false)
+            {
+                Debug.Log("GainSkills failed for task : " + task.Key);
+                return;
+            }
             
             await task.Value.Log(name);
             //todo : update on task done
@@ -161,4 +178,38 @@ public class Character : MonoBehaviour
         var config = needsConfigs.Find(nc => nc == need.config);
         return config.FullFillMax <= need.FullFillAmount;
     }
+
+    private async Task<bool> GainSkills(Act task)
+    {
+        foreach (var skill in task.config.RequiredSkills)
+        {
+            bool hasSkill = skills.FindAll(skl => skl.skillType == skill.skillType).Count > 0;
+            SkillComp mySkill = skills.Find(skl => skl.skillType == skill.skillType);
+
+            if (!hasSkill || mySkill.skillLevel < skill.skillLevel)
+            {
+                var seekResult = await Seek(skill);
+
+                return seekResult;
+            }
+        }
+        
+        return true;
+    }
+
+    private async void Interact(IEntity other)
+    {
+        
+    }
+
+    private async Task<bool> Seek(SkillComp skill)
+    {
+        return false;
+    }
+
+    private void SearchInteractionTargets(SkillComp skill)
+    {
+        
+    }
+    
 }

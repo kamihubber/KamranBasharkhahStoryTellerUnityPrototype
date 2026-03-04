@@ -15,6 +15,19 @@ public struct NeedEffect
    public float amount;
 }
 
+[Serializable]
+public struct SkillComp
+{
+   public string skillName;
+   public int skillLevel;
+   public SkillType skillType;
+}
+
+public enum SkillType
+{
+   physical,
+}
+
 [CreateAssetMenu(menuName = "Act")]
 public class ActConfig : ScriptableObject
 {
@@ -44,8 +57,12 @@ public class ActConfig : ScriptableObject
 
    public float FullFillAmount => fullFillAmount;
 
+   public List<SkillComp> RequiredSkills => requiredSkills;
+
    [SerializeField] private float requiredTimeSeconds;
    [SerializeField] private float fullFillAmount;
+   
+   [SerializeField] List<SkillComp> requiredSkills = new List<SkillComp>();
 }
 
 
