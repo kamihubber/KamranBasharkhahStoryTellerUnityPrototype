@@ -640,12 +640,12 @@ GameObject:
   - component: {fileID: 405997076}
   - component: {fileID: 405997075}
   m_Layer: 0
-  m_Name: someTwo
+  m_Name: Gym!
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &405997075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -658,6 +658,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d83d78ff97c45f44a46b573260c3ad5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skills:
+  - skillName: sword fight trainging
+    skillLevel: 3
+    skillType: 0
   name: kazem
   _actsRepo:
   - {fileID: 11400000, guid: 4cdad508bc1df1b45b4d652e6e2c7367, type: 2}
@@ -666,17 +670,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 845aacbcb0e2c034e9de9c6dbf96a898, type: 2}
   - {fileID: 11400000, guid: 40c65e954640af149ba87e84601ce7e3, type: 2}
   - {fileID: 11400000, guid: 89cb8042d731c054c9b8373ffd0628b4, type: 2}
-  needsConfigs:
-  - {fileID: 11400000, guid: a0e412d4a7b8f024b9b2cec9ad5b95f6, type: 2}
-  - {fileID: 11400000, guid: 4d3e76e83da6f974fb59592272d1c2d0, type: 2}
-  - {fileID: 11400000, guid: a11f0899458f36042afbf223e623ff27, type: 2}
-  needsInitialValues:
-  - needConfig: {fileID: 11400000, guid: a0e412d4a7b8f024b9b2cec9ad5b95f6, type: 2}
-    amount: 0
-  - needConfig: {fileID: 11400000, guid: 4d3e76e83da6f974fb59592272d1c2d0, type: 2}
-    amount: 8
-  - needConfig: {fileID: 11400000, guid: a11f0899458f36042afbf223e623ff27, type: 2}
-    amount: 0
+  needsConfigs: []
+  needsInitialValues: []
 --- !u!4 &405997076
 Transform:
   m_ObjectHideFlags: 0
@@ -1238,6 +1233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d83d78ff97c45f44a46b573260c3ad5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skills: []
   name: jack
   _actsRepo:
   - {fileID: 11400000, guid: 4cdad508bc1df1b45b4d652e6e2c7367, type: 2}

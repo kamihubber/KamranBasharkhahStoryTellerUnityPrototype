@@ -17,13 +17,20 @@ public interface IEntity
     
 }
 
+public class GameEntity : MonoBehaviour, IEntity
+{
+    [SerializeField] protected List<SkillComp> skills;
+
+    public List<SkillComp> Skills => skills;
+}
+
 [Serializable]
 public struct NeedFullFill
 {
     public NeedConfig needConfig;
     public int amount;
 }
-public class Character : MonoBehaviour, IEntity
+public class Character : GameEntity
 {
     [SerializeField] private string name;
     
@@ -51,8 +58,6 @@ public class Character : MonoBehaviour, IEntity
     public Dictionary<NeedConfig, Act> Tasks => tasks;
 
     public string Name => name;
-
-    [SerializeField] private List<SkillComp> skills;
 
     private void Start()
     {
@@ -108,6 +113,8 @@ public class Character : MonoBehaviour, IEntity
             task.Value.OnActFailed += OnActFailed;
             
             //await skills
+            //currentlly applying for head acts
+            //should be checked for each act in fact
             var gainSkillsResult = await GainSkills(task.Value);
 
             if (gainSkillsResult == false)
@@ -183,33 +190,70 @@ public class Character : MonoBehaviour, IEntity
     {
         foreach (var skill in task.config.RequiredSkills)
         {
-            bool hasSkill = skills.FindAll(skl => skl.skillType == skill.skillType).Count > 0;
-            SkillComp mySkill = skills.Find(skl => skl.skillType == skill.skillType);
+            bool hasSkill = Skills.FindAll(skl => skl.skillType == skill.skillType).Count > 0;
+            SkillComp mySkill = Skills.Find(skl => skl.skillType == skill.skillType);
 
             if (!hasSkill || mySkill.skillLevel < skill.skillLevel)
             {
                 var seekResult = await Seek(skill);
 
-                return seekResult;
+                if (seekResult.success)
+                {
+                    await Interact(seekResult.targetOwner);
+                }
+
+                return seekResult.success;
             }
         }
         
         return true;
     }
 
-    private async void Interact(IEntity other)
+    private async Task Interact(GameEntity other)
     {
-        
+        Debug.Log(name + " is interacting with " + other.name );
     }
 
-    private async Task<bool> Seek(SkillComp skill)
+    public struct ComponentSeekResult
     {
-        return false;
+        public bool success;
+        public GameEntity targetOwner;
     }
 
-    private void SearchInteractionTargets(SkillComp skill)
+    private async Task<ComponentSeekResult> Seek(SkillComp skill)
     {
+        Debug.Log(name + "is seeking " + skill.skillName);
         
+        var targetOwner = SearchInteractionTargets(skill);
+
+        if (targetOwner == null)
+        {
+            return new ComponentSeekResult()
+            {
+                success = false,
+            };
+        }
+        else
+        {
+            return new ComponentSeekResult()
+            {
+                success = true,
+                targetOwner = targetOwner,
+            };
+        }
+    }
+
+    private GameEntity SearchInteractionTargets(SkillComp skill)
+    {
+        bool any = FindObjectsOfType<GameEntity>()
+            .Where(ge => ge.Skills.Count(skl => skl.skillType == skill.skillType) > 0).Any();
+        
+        if (!any)
+            return null;
+        
+        var interactionGoal = FindObjectsOfType<GameEntity>().Where(ge => ge.Skills.Count(skl => skl.skillType == skill.skillType) > 0).First();
+        
+        return interactionGoal;
     }
     
 }
