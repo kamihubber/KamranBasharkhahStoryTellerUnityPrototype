@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class RegularGoapStrategy : IGoaperStrategy
@@ -10,6 +11,12 @@ public class RegularGoapStrategy : IGoaperStrategy
     public Dictionary<NeedConfig, Act> GetActs(List<NeedConfig> needsConfigs, List<ActConfig> _actsRepo, List<Need> characterNeeds)
     {
         Dictionary<NeedConfig, Act> acts = new Dictionary<NeedConfig, Act>();
+        
+        //where is emergant factor?
+        //now we have seek and interact and gain skills for components/skills
+        //this might change tho
+        //but for now we need apply emergant based on traits ON..
+        // ON seek & interact & gain skills
         
         //we are trying to reach interactions frist , we use static style for rapid test
         //( ** maybe , add a feature , some subacts cant be sarted untill their requirements are met)
@@ -99,5 +106,89 @@ public class RegularGoapStrategy : IGoaperStrategy
         }
         
         return acts;
+    }
+    
+    //emergant candidate factors : change of skills and traits in time
+    //emergant candidate factors : envoirment effects on current state
+    
+    //emergant sseking process should be placed here 
+    //some skills like thinking might effect this process
+    //intelligence might be a better name for thinking skill
+
+    public ActConfig GetInterAct(NeedConfig needsConfig, List<ActConfig> characterActs, SkillComp seekingComp, GameEntity self,
+        GameEntity otherCharacterEntity)
+    {
+        //myabe check our staibility first, for now using traits but it should be mental state
+        //if not stable more insane randomize
+        //if stable ,score on interactable components of two entities (might interefere seekingcomp or traits later) ->
+        //probably with a simple distraction/mistake randomness
+        
+        //tagging/groupping components, (types?)
+        
+        
+        
+        if (self.MentalState == MentalState.Normal)
+        {
+            //always check placeable comp for materials/physical domain
+            //(acts which have seekingComp may or may not be an option)
+            //find acts suitable for interacting? have special interact components?
+            //may first check thinking skill
+            
+            //final comments to perform , for now
+            //0 - find common interact skills among self and other
+            //0 - can go out of common range based on mistake/random factor
+            //1 - sort descending other entity skill with skill amount
+            //2 - my traits + simple random (mistake , ...)
+              //2-0 sort traits?
+              //2 -1 get a range of them based on my traits (sort tarits?)
+              //2 -2 choose in range with a randomness , can exeed range based on mistake or ...
+
+              //how traits effect?
+              //list of interactable acts for each entity (type/group or single) with different values
+              //
+
+              self.Skills.Sort((comp, skillComp) =>
+              {
+                  return comp.skillLevel - skillComp.skillLevel;
+              });
+              
+              otherCharacterEntity.Skills.Sort((comp, skillComp) =>
+              {
+                  return comp.skillLevel - skillComp.skillLevel;
+              });
+              
+              List<SkillComp> commonSkills = new List<SkillComp>();
+              
+              foreach (var skill in self.Skills)
+              {
+                  otherCharacterEntity.Skills.FindAll(skl => skl.skillType == skill.skillType).ForEach(skl => commonSkills.Add(skill));
+              }
+
+              SkillComp skillResult = new SkillComp();
+
+              if (commonSkills.Count == 0)
+                  skillResult = self.Skills.Last();
+              else
+              {
+                  skillResult = commonSkills[0];
+              }
+
+              foreach (var act in characterActs)
+              {
+                  if (act.RequiredSkills.Count > 0)
+                  {
+                      var allActsAcceptable = characterActs.FindAll(actr => actr.RequiredSkills.Any(rs => rs.skillType == skillResult.skillType));
+                      return allActsAcceptable.FirstOrDefault();
+                  }
+              }
+
+        }
+        else
+        {
+            //go insane
+            //having some traits or components might normalize this a bit!
+        }
+        
+        return null;
     }
 }

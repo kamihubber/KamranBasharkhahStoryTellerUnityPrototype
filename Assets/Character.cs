@@ -17,11 +17,39 @@ public interface IEntity
     
 }
 
+public struct Trait
+{
+    public string Name;
+    public TraitType Type;
+    public float Value;
+}
+
+public enum TraitType
+{
+    Normal,
+    Insane
+}
+
+public enum MentalState
+{
+    Normal,
+    Insane,
+}
+
 public class GameEntity : MonoBehaviour, IEntity
 {
     [SerializeField] protected List<SkillComp> skills;
 
     public List<SkillComp> Skills => skills;
+
+    public List<Trait> Traits => traits;
+
+    public MentalState MentalState => _mentalState;
+
+    [SerializeField] protected List<Trait> traits;
+    
+    private MentalState _mentalState;
+    
 }
 
 [Serializable]
@@ -211,7 +239,15 @@ public class Character : GameEntity
 
     private async Task Interact(GameEntity other)
     {
-        Debug.Log(name + " is interacting with " + other.name );
+        ActConfig actConfig = regularGoapStrategy.GetInterAct(needsConfigs[0], _actsRepo, new SkillComp(), this, other);
+
+        if (actConfig == null)
+        {
+            Debug.Log(name + " does not know what to do and just stares at some point for hours... ");
+            return;
+        }
+        
+        Debug.Log(name + " is " + actConfig.Name + " with " + other.name );
     }
 
     public struct ComponentSeekResult

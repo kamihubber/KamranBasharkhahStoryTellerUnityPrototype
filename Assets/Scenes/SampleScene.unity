@@ -662,6 +662,9 @@ MonoBehaviour:
   - skillName: sword fight trainging
     skillLevel: 3
     skillType: 0
+  - skillName: talk
+    skillLevel: 3
+    skillType: 1
   name: kazem
   _actsRepo:
   - {fileID: 11400000, guid: 4cdad508bc1df1b45b4d652e6e2c7367, type: 2}
@@ -1233,7 +1236,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d83d78ff97c45f44a46b573260c3ad5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skills: []
+  skills:
+  - skillName: talk
+    skillLevel: 1
+    skillType: 1
   name: jack
   _actsRepo:
   - {fileID: 11400000, guid: 4cdad508bc1df1b45b4d652e6e2c7367, type: 2}
@@ -1242,6 +1248,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 845aacbcb0e2c034e9de9c6dbf96a898, type: 2}
   - {fileID: 11400000, guid: 40c65e954640af149ba87e84601ce7e3, type: 2}
   - {fileID: 11400000, guid: 89cb8042d731c054c9b8373ffd0628b4, type: 2}
+  - {fileID: 11400000, guid: 4cda1861cc72fba4d96b6d95420d1fcc, type: 2}
   needsConfigs:
   - {fileID: 11400000, guid: a0e412d4a7b8f024b9b2cec9ad5b95f6, type: 2}
   needsInitialValues:

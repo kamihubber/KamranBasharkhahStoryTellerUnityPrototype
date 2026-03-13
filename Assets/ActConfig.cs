@@ -21,11 +21,15 @@ public struct SkillComp
    public string skillName;
    public int skillLevel;
    public SkillType skillType;
+   //giving, maybe each skillcomp gives an amount of seekingcomp, if succeeded
 }
 
 public enum SkillType
 {
    physical,
+   talkable,
+   tradable,
+   placeable
 }
 
 [CreateAssetMenu(menuName = "Act")]
@@ -59,10 +63,16 @@ public class ActConfig : ScriptableObject
 
    public List<SkillComp> RequiredSkills => requiredSkills;
 
+   public List<SkillComp> Components => components;
+
+   public string Name => name;
+
    [SerializeField] private float requiredTimeSeconds;
    [SerializeField] private float fullFillAmount;
    
    [SerializeField] List<SkillComp> requiredSkills = new List<SkillComp>();
+   
+   [SerializeField] List<SkillComp> components = new List<SkillComp>();
 }
 
 
@@ -90,12 +100,18 @@ public class Act
 
    public bool IsFailed => _isFailed;
 
+   public List<SkillComp> Components => components;
+   public List<SkillComp> RequiredSkills => requiedSkills;
+
    public event Action<Act> OnActDone;
    public event Action<Act> OnActFailed;
    public bool _isFailed;
 
    private float _requiredJobTimeSeconds;
    private float _fullFillAmount;
+   
+   List<SkillComp> components = new List<SkillComp>();
+   List<SkillComp> requiedSkills = new List<SkillComp>();
 
    public Act(ActConfig config, string name, Act parentAct)
    {
@@ -112,7 +128,10 @@ public class Act
             requiredActs.Add(subact);
          }
       }
-     
+
+      components = config.Components;
+      requiedSkills = config.RequiredSkills;
+
    }
 
    private void HandleActFailed(Act subact)
