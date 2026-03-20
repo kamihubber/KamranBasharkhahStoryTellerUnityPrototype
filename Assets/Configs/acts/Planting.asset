@@ -15,8 +15,14 @@ MonoBehaviour:
   name: Planting
   effects:
   - needConfig: {fileID: 11400000, guid: 4d3e76e83da6f974fb59592272d1c2d0, type: 2}
-    amount: -2
+    amount: 0.01
   wisdomFactor: 1
   actFactor: 1
-  requiredActs:
-  - {fileID: 11400000, guid: 262e2459d11e5a14b94f8ac7b41eef8f, type: 2}
+  requiredActs: []
+  requiredTimeSeconds: 23
+  fullFillAmount: 23
+  requiredSkills:
+  - skillName: farming
+    skillLevel: 3
+    skillType: 5
+  components: []

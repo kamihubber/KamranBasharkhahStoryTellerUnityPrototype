@@ -29,7 +29,11 @@ public enum SkillType
    physical,
    talkable,
    tradable,
-   placeable
+   placeable,
+   useable,
+   farming,
+   politics,
+   fighting,
 }
 
 [CreateAssetMenu(menuName = "Act")]

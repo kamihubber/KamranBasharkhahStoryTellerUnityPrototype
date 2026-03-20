@@ -23,6 +23,7 @@ MonoBehaviour:
   requiredTimeSeconds: 1
   fullFillAmount: 1
   requiredSkills:
-  - skillName: swordfight
-    skillLevel: 2
-    skillType: 0
+  - skillName: fight
+    skillLevel: 0
+    skillType: 7
+  components: []

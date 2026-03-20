@@ -281,6 +281,11 @@ public class Character : GameEntity
 
     private GameEntity SearchInteractionTargets(SkillComp skill)
     {
+        // - a range factor
+        //     -a obscure factor
+        //     - a mistake factor
+        //     - all affected by mental factors
+            
         bool any = FindObjectsOfType<GameEntity>()
             .Where(ge => ge.Skills.Count(skl => skl.skillType == skill.skillType) > 0).Any();
         

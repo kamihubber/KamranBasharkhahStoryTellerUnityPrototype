@@ -10,15 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 878e1f0fcb47b2842bc8a2576028d7d8, type: 3}
-  m_Name: farm
+  m_Name: Use
   m_EditorClassIdentifier: 
-  name: farming
+  name: Use
   effects: []
   wisdomFactor: 1
   actFactor: 1
-  requiredActs:
-  - {fileID: 11400000, guid: ef226a96889ff574ba0dd703d83a43db, type: 2}
-  requiredTimeSeconds: 0
-  fullFillAmount: 0
-  requiredSkills: []
+  requiredActs: []
+  requiredTimeSeconds: 1
+  fullFillAmount: 1
+  requiredSkills:
+  - skillName: using
+    skillLevel: 1
+    skillType: 4
   components: []

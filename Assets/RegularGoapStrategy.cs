@@ -146,6 +146,9 @@ public class RegularGoapStrategy : IGoaperStrategy
               //how traits effect?
               //list of interactable acts for each entity (type/group or single) with different values
               //
+              
+              //choose based on skill levels?
+              //multiple interacts (walk , ...), basic interacts...
 
               self.Skills.Sort((comp, skillComp) =>
               {
@@ -170,7 +173,14 @@ public class RegularGoapStrategy : IGoaperStrategy
                   skillResult = self.Skills.Last();
               else
               {
-                  skillResult = commonSkills[0];
+                  SkillComp max;
+                  max = commonSkills[0];
+                  foreach (var cs in commonSkills)
+                  {
+                      if (cs.skillLevel > max.skillLevel)
+                          max = cs;
+                  }
+                  skillResult = max;
               }
 
               foreach (var act in characterActs)
@@ -186,6 +196,8 @@ public class RegularGoapStrategy : IGoaperStrategy
         else
         {
             //go insane
+            //go disappointed
+            //..
             //having some traits or components might normalize this a bit!
         }
         

@@ -1,0 +1,12 @@
+﻿- seek and interact
+
+  - based on mental (physical) state , envoirmental , and ranodom factors seek
+    - write test , then :
+    - a range factor
+    -a obscure factor
+    - a mistake factor
+    - all affected by mental factors
+    
+  - interact
+  - each interact timiong ?
+  - traits ?

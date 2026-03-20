@@ -19,3 +19,10 @@ MonoBehaviour:
   wisdomFactor: 1
   actFactor: 1
   requiredActs: []
+  requiredTimeSeconds: 0
+  fullFillAmount: 0
+  requiredSkills:
+  - skillName: digging
+    skillLevel: 4
+    skillType: 4
+  components: []
