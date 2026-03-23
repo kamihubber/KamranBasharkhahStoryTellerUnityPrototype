@@ -1,7 +1,13 @@
-﻿- seek and interact
+﻿
+-? story mode ? logs
+
+- bug : seems that there is a problem with async/await timings
+
+temp : sun and land , interactions responses
+
+- seek and interact
 
   - based on mental (physical) state , envoirmental , and ranodom factors seek
-    - write test , then :
     - a range factor
     -a obscure factor
     - a mistake factor

@@ -140,17 +140,9 @@ public class Character : GameEntity
             task.Value.OnActFailed -= OnActFailed;
             task.Value.OnActFailed += OnActFailed;
             
-            //await skills
-            //currentlly applying for head acts
-            //should be checked for each act in fact
-            var gainSkillsResult = await GainSkills(task.Value);
+            task.Value.OnRequestGainSkills -= RequestGainSkills;
+            task.Value.OnRequestGainSkills += RequestGainSkills;
 
-            if (gainSkillsResult == false)
-            {
-                Debug.Log("GainSkills failed for task : " + task.Key);
-                return;
-            }
-            
             await task.Value.Log(name);
             //todo : update on task done
             UpdateNeedsFullFillScores(task.Value);
@@ -169,6 +161,22 @@ public class Character : GameEntity
         {
             tasks.Remove(expiredTask.Key);
         }
+    }
+
+    public async Task<bool> RequestGainSkills(Act task)
+    {
+        //await skills
+        //currentlly applying for head acts
+        //should be checked for each act in fact
+        var gainSkillsResult = await GainSkills(task);
+
+        if (gainSkillsResult == false)
+        {
+            Debug.Log("GainSkills failed for task : " + task.Name);
+            return false;
+        }
+        
+        return true;
     }
 
     private void OnActDone(Act task)
@@ -248,6 +256,12 @@ public class Character : GameEntity
         }
         
         Debug.Log(name + " is " + actConfig.Name + " with " + other.name );
+        
+        //todo : temp
+        Act tempact = new Act(actConfig, actConfig.Name, null);
+        tempact.OnRequestGainSkills += RequestGainSkills;
+        await tempact.Log(this.Name);
+
     }
 
     public struct ComponentSeekResult

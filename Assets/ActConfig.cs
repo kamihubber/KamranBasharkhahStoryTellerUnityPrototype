@@ -117,6 +117,8 @@ public class Act
    List<SkillComp> components = new List<SkillComp>();
    List<SkillComp> requiedSkills = new List<SkillComp>();
 
+   public event Func<Act, Task<bool>> OnRequestGainSkills;
+
    public Act(ActConfig config, string name, Act parentAct)
    {
       this.config = config;
@@ -156,6 +158,11 @@ public class Act
          return;
       
       await ProcessSubActs(prefix);
+      
+      var gainSkillResult = await OnRequestGainSkills(this);
+      
+      if (!gainSkillResult)
+         return;
 
       while (_requiredJobTimeSeconds < config.RequiredTimeSeconds)
       {
@@ -174,11 +181,11 @@ public class Act
       }
 
       if (IsFullfilled())
-        OnActDone.Invoke(this);
+        OnActDone?.Invoke(this);
       else
       {
          _isFailed = true;
-         OnActFailed.Invoke(this);
+         OnActFailed?.Invoke(this);
       }
    }
    
@@ -194,6 +201,7 @@ public class Act
             
             subact.ParentAct = this;
             subact.OnActDone = OnActDone;
+            subact.OnRequestGainSkills = OnRequestGainSkills;
             await subact.Log(prefix);
          }
       }

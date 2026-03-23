@@ -13,14 +13,12 @@ MonoBehaviour:
   m_Name: Planting
   m_EditorClassIdentifier: 
   name: Planting
-  effects:
-  - needConfig: {fileID: 11400000, guid: 4d3e76e83da6f974fb59592272d1c2d0, type: 2}
-    amount: 0.01
+  effects: []
   wisdomFactor: 1
   actFactor: 1
   requiredActs: []
   requiredTimeSeconds: 23
-  fullFillAmount: 23
+  fullFillAmount: 100
   requiredSkills:
   - skillName: farming
     skillLevel: 3
