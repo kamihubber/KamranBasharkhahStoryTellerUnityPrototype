@@ -18,3 +18,14 @@ MonoBehaviour:
   actFactor: 1
   requiredActs:
   - {fileID: 11400000, guid: df2baaf83b32d8047b64828f22c11a41, type: 2}
+  requiredTimeSeconds: 0
+  fullFillAmount: 0
+  requiredSkills:
+  - skillName: talk
+    skillLevel: 2
+    skillType: 1
+  providingSkills:
+  - skillName: 
+    skillLevel: 8
+    skillType: 5
+  components: []

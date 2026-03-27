@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -149,6 +150,11 @@ public class RegularGoapStrategy : IGoaperStrategy
               
               //choose based on skill levels?
               //multiple interacts (walk , ...), basic interacts...
+              
+              // * common interactable elements(components)
+              //* can i do the act?
+              //* can the other be subject of this act??
+              //*** if the act gains the seeking comp?
 
               self.Skills.Sort((comp, skillComp) =>
               {
@@ -159,38 +165,27 @@ public class RegularGoapStrategy : IGoaperStrategy
               {
                   return comp.skillLevel - skillComp.skillLevel;
               });
-              
-              List<SkillComp> commonSkills = new List<SkillComp>();
-              
-              foreach (var skill in self.Skills)
-              {
-                  otherCharacterEntity.Skills.FindAll(skl => skl.skillType == skill.skillType).ForEach(skl => commonSkills.Add(skill));
-              }
 
-              SkillComp skillResult = new SkillComp();
-
-              if (commonSkills.Count == 0)
-                  skillResult = self.Skills.Last();
-              else
-              {
-                  SkillComp max;
-                  max = commonSkills[0];
-                  foreach (var cs in commonSkills)
-                  {
-                      if (cs.skillLevel > max.skillLevel)
-                          max = cs;
-                  }
-                  skillResult = max;
-              }
-
+              ActConfig candidateAct = null;
               foreach (var act in characterActs)
               {
-                  if (act.RequiredSkills.Count > 0)
+                  if (act.ProvidingSkills.Count > 0)
                   {
-                      var allActsAcceptable = characterActs.FindAll(actr => actr.RequiredSkills.Any(rs => rs.skillType == skillResult.skillType));
-                      return allActsAcceptable.FirstOrDefault();
+                      if (!act.ProvidingSkills.Any(skl => skl.skillType == seekingComp.skillType))
+                          continue;
+
+                      float candiateskillammount = (candidateAct == null) ? 0 : candidateAct.ProvidingSkills
+                          .Find(skl => skl.skillType == seekingComp.skillType).skillLevel;
+                      
+                      float skillammount = act.ProvidingSkills
+                          .Find(skl => skl.skillType == seekingComp.skillType).skillLevel;
+
+                      if ((candidateAct == null) || (candiateskillammount < skillammount))
+                          candidateAct = act;
                   }
               }
+
+              return candidateAct;
 
         }
         else
@@ -203,4 +198,112 @@ public class RegularGoapStrategy : IGoaperStrategy
         
         return null;
     }
+    
+    
+    
+    
+    
+    //simple & asic
+    // public ActConfig GetInterAct(NeedConfig needsConfig, List<ActConfig> characterActs, SkillComp seekingComp, GameEntity self,
+    //     GameEntity otherCharacterEntity)
+    // {
+    //     //myabe check our staibility first, for now using traits but it should be mental state
+    //     //if not stable more insane randomize
+    //     //if stable ,score on interactable components of two entities (might interefere seekingcomp or traits later) ->
+    //     //probably with a simple distraction/mistake randomness
+    //     
+    //     //tagging/groupping components, (types?)
+    //     
+    //     
+    //     
+    //     if (self.MentalState == MentalState.Normal)
+    //     {
+    //         //always check placeable comp for materials/physical domain
+    //         //(acts which have seekingComp may or may not be an option)
+    //         //find acts suitable for interacting? have special interact components?
+    //         //may first check thinking skill
+    //         
+    //         //final comments to perform , for now
+    //         //0 - find common interact skills among self and other
+    //         //0 - can go out of common range based on mistake/random factor
+    //         //1 - sort descending other entity skill with skill amount
+    //         //2 - my traits + simple random (mistake , ...)
+    //           //2-0 sort traits?
+    //           //2 -1 get a range of them based on my traits (sort tarits?)
+    //           //2 -2 choose in range with a randomness , can exeed range based on mistake or ...
+    //
+    //           //how traits effect?
+    //           //list of interactable acts for each entity (type/group or single) with different values
+    //           //
+    //           
+    //           //choose based on skill levels?
+    //           //multiple interacts (walk , ...), basic interacts...
+    //           
+    //           // * common interactable elements(components)
+    //           //* can i do the act?
+    //           //* can the other be subject of this act??
+    //           //*** if the act gains the seeking comp?
+    //
+    //           self.Skills.Sort((comp, skillComp) =>
+    //           {
+    //               return comp.skillLevel - skillComp.skillLevel;
+    //           });
+    //           
+    //           otherCharacterEntity.Skills.Sort((comp, skillComp) =>
+    //           {
+    //               return comp.skillLevel - skillComp.skillLevel;
+    //           });
+    //           
+    //           List<SkillComp> commonSkills = new List<SkillComp>();
+    //           
+    //           foreach (var skill in self.Skills)
+    //           {
+    //               otherCharacterEntity.Skills.FindAll(skl => skl.skillType == skill.skillType).ForEach(skl => commonSkills.Add(skill));
+    //           }
+    //
+    //           SkillComp skillResult = new SkillComp();
+    //
+    //           if (commonSkills.Count == 0)
+    //           {
+    //               SkillComp max;
+    //               max = self.Skills[0];
+    //               foreach (var s in self.Skills)
+    //               {
+    //                   if (s.skillLevel > max.skillLevel)
+    //                       max = s;
+    //               }
+    //               skillResult = max;
+    //           }
+    //           else
+    //           {
+    //               SkillComp max;
+    //               max = commonSkills[0];
+    //               foreach (var cs in commonSkills)
+    //               {
+    //                   if (cs.skillLevel > max.skillLevel)
+    //                       max = cs;
+    //               }
+    //               skillResult = max;
+    //           }
+    //
+    //           foreach (var act in characterActs)
+    //           {
+    //               if (act.RequiredSkills.Count > 0)
+    //               {
+    //                   var allActsAcceptable = characterActs.FindAll(actr => actr.RequiredSkills.Any(rs => rs.skillType == skillResult.skillType));
+    //                   return allActsAcceptable.FirstOrDefault();
+    //               }
+    //           }
+    //
+    //     }
+    //     else
+    //     {
+    //         //go insane
+    //         //go disappointed
+    //         //..
+    //         //having some traits or components might normalize this a bit!
+    //     }
+    //     
+    //     return null;
+    // }
 }

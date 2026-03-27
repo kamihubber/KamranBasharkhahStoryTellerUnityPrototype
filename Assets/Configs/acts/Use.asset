@@ -23,4 +23,8 @@ MonoBehaviour:
   - skillName: using
     skillLevel: 1
     skillType: 4
+  providingSkills:
+  - skillName: 
+    skillLevel: 2
+    skillType: 5
   components: []

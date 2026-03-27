@@ -49,7 +49,13 @@ public class GameEntity : MonoBehaviour, IEntity
     [SerializeField] protected List<Trait> traits;
     
     private MentalState _mentalState;
-    
+
+    //todo : temp
+    public virtual async Task<bool> Interact(GameEntity other, SkillComp? comp = null)
+    {
+        return false;
+    }
+
 }
 
 [Serializable]
@@ -134,6 +140,7 @@ public class Character : GameEntity
 
         foreach (var task in tasks)
         {
+            
             task.Value.OnActDone -= OnActDone;
             task.Value.OnActDone += OnActDone;
             
@@ -145,7 +152,7 @@ public class Character : GameEntity
 
             await task.Value.Log(name);
             //todo : update on task done
-            UpdateNeedsFullFillScores(task.Value);
+            //UpdateNeedsFullFillScores(task.Value);
         }
 
         if ((tasks != null) && (tasks.Count > 0))
@@ -166,8 +173,7 @@ public class Character : GameEntity
     public async Task<bool> RequestGainSkills(Act task)
     {
         //await skills
-        //currentlly applying for head acts
-        //should be checked for each act in fact
+        
         var gainSkillsResult = await GainSkills(task);
 
         if (gainSkillsResult == false)
@@ -183,7 +189,7 @@ public class Character : GameEntity
     {
         if (task.ParentAct == null)
         {
-            //UpdateNeedsFullFillScores(task);
+            UpdateNeedsFullFillScores(task);
         }
         else
         {
@@ -233,35 +239,47 @@ public class Character : GameEntity
             {
                 var seekResult = await Seek(skill);
 
+                bool interactResult = false;
                 if (seekResult.success)
                 {
-                    await Interact(seekResult.targetOwner);
+                    interactResult = await Interact(seekResult.targetOwner, skill);
+                    //todo : gain??
                 }
 
-                return seekResult.success;
+                return interactResult;
             }
         }
         
         return true;
     }
 
-    private async Task Interact(GameEntity other)
+    //await for other response or contine?
+    //set result based on other response?
+    //aligned with seeking comp?
+    public override async Task<bool> Interact(GameEntity other, SkillComp? comp = null)
     {
-        ActConfig actConfig = regularGoapStrategy.GetInterAct(needsConfigs[0], _actsRepo, new SkillComp(), this, other);
+        ActConfig actConfig = regularGoapStrategy.GetInterAct(needsConfigs[0], _actsRepo, comp.Value, this, other);
 
         if (actConfig == null)
         {
             Debug.Log(name + " does not know what to do and just stares at some point for hours... ");
-            return;
+            return false;
         }
         
         Debug.Log(name + " is " + actConfig.Name + " with " + other.name );
         
+        bool result = false;
+        
         //todo : temp
         Act tempact = new Act(actConfig, actConfig.Name, null);
         tempact.OnRequestGainSkills += RequestGainSkills;
+        tempact.OnActDone += (act) => { result = true; };
+        tempact.OnActFailed += (act) => { result = false; };
         await tempact.Log(this.Name);
 
+        //await other.Interact(this);
+        
+        return result;
     }
 
     public struct ComponentSeekResult

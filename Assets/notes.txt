@@ -15,3 +15,7 @@ dynamic method
   semi static (current)
    - header acts + requirements + (stay until provided) + 
       (requirements for requirements) + (tags,groups)
+      
+      
+      
+- fancy : maybe we can have an additional top layer which fancies the logs for story on high level

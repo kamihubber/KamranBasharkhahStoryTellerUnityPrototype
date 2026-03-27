@@ -17,10 +17,14 @@ MonoBehaviour:
   wisdomFactor: 1
   actFactor: 1
   requiredActs: []
-  requiredTimeSeconds: 1
+  requiredTimeSeconds: 12
   fullFillAmount: 500000
   requiredSkills:
   - skillName: talk
     skillLevel: 1
+    skillType: 1
+  providingSkills:
+  - skillName: talk
+    skillLevel: 4
     skillType: 1
   components: []

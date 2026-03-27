@@ -71,10 +71,13 @@ public class ActConfig : ScriptableObject
 
    public string Name => name;
 
+   public List<SkillComp> ProvidingSkills => providingSkills;
+
    [SerializeField] private float requiredTimeSeconds;
    [SerializeField] private float fullFillAmount;
    
    [SerializeField] List<SkillComp> requiredSkills = new List<SkillComp>();
+   [SerializeField] List<SkillComp> providingSkills = new List<SkillComp>();
    
    [SerializeField] List<SkillComp> components = new List<SkillComp>();
 }
@@ -107,6 +110,8 @@ public class Act
    public List<SkillComp> Components => components;
    public List<SkillComp> RequiredSkills => requiedSkills;
 
+   public List<SkillComp> ProvidingSkills => providingSkills;
+
    public event Action<Act> OnActDone;
    public event Action<Act> OnActFailed;
    public bool _isFailed;
@@ -116,6 +121,7 @@ public class Act
    
    List<SkillComp> components = new List<SkillComp>();
    List<SkillComp> requiedSkills = new List<SkillComp>();
+   List<SkillComp> providingSkills = new List<SkillComp>();
 
    public event Func<Act, Task<bool>> OnRequestGainSkills;
 
@@ -137,6 +143,7 @@ public class Act
 
       components = config.Components;
       requiedSkills = config.RequiredSkills;
+      providingSkills = config.ProvidingSkills;
 
    }
 
@@ -157,12 +164,21 @@ public class Act
       if (_isFailed)
          return;
       
-      await ProcessSubActs(prefix);
+      //are we ignoring subacts results?!
+      bool subActsResult = await ProcessSubActs(prefix);
+      if (!subActsResult)
+      {
+         OnActFailed?.Invoke(this);
+         return;
+      }
       
       var gainSkillResult = await OnRequestGainSkills(this);
-      
       if (!gainSkillResult)
+      {
+         //should we call onfailed?
+         OnActFailed?.Invoke(this);
          return;
+      }
 
       while (_requiredJobTimeSeconds < config.RequiredTimeSeconds)
       {
@@ -189,22 +205,31 @@ public class Act
       }
    }
    
-   public async Task ProcessSubActs(string prefix)
+   public async Task<bool> ProcessSubActs(string prefix)
    {
+      bool result = true;
+      
       // Process sub acts
       if (requiredActs.Count > 0)
       {
          foreach (var subact in requiredActs)
          {
             if (subact.IsFullfilled())
-               return;
+               return true;
             
             subact.ParentAct = this;
-            subact.OnActDone = OnActDone;
+            //check???
+            //logs??
+            subact.OnActDone += (subact) => { result = true; };
+            subact.OnActFailed += (subact) => { result = false; };
+            //
             subact.OnRequestGainSkills = OnRequestGainSkills;
             await subact.Log(prefix);
+            return result;
          }
       }
+      
+      return result;
    }
 
 }

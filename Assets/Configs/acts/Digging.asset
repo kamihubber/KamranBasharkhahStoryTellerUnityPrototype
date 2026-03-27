@@ -21,8 +21,9 @@ MonoBehaviour:
   requiredActs: []
   requiredTimeSeconds: 0
   fullFillAmount: 0
-  requiredSkills:
-  - skillName: digging
-    skillLevel: 4
-    skillType: 4
+  requiredSkills: []
+  providingSkills:
+  - skillName: 
+    skillLevel: 3
+    skillType: 5
   components: []

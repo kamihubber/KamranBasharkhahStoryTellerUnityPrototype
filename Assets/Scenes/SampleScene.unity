@@ -910,7 +910,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skills:
   - skillName: talk
-    skillLevel: 2
+    skillLevel: 1
     skillType: 1
   - skillName: use
     skillLevel: 2
@@ -929,6 +929,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 262e2459d11e5a14b94f8ac7b41eef8f, type: 2}
   - {fileID: 11400000, guid: b4b4792c5b1c1414cb000d9cd3911abc, type: 2}
   - {fileID: 11400000, guid: ef226a96889ff574ba0dd703d83a43db, type: 2}
+  - {fileID: 11400000, guid: a29aef88693f4e34cbe7f4fac6fba20d, type: 2}
   needsConfigs:
   - {fileID: 11400000, guid: 4d3e76e83da6f974fb59592272d1c2d0, type: 2}
   needsInitialValues:
@@ -1129,20 +1130,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skills:
-  - skillName: food provide
-    skillLevel: 5
-    skillType: 3
   - skillName: Use
     skillLevel: 4
     skillType: 4
-  - skillName: fightable
-    skillLevel: 1
-    skillType: 1
+  - skillName: Physical Resistance
+    skillLevel: 40
+    skillType: 0
   - skillName: farming
-    skillLevel: 5
+    skillLevel: 1
     skillType: 5
   name: land
-  _actsRepo: []
+  _actsRepo:
+  - {fileID: 11400000, guid: 4cdad508bc1df1b45b4d652e6e2c7367, type: 2}
+  - {fileID: 11400000, guid: 82a7cd558759a9f449f54a782eee9e75, type: 2}
+  - {fileID: 11400000, guid: 4daedf455c61c3d448e25b0df7499f6e, type: 2}
+  - {fileID: 0}
   needsConfigs: []
   needsInitialValues: []
 --- !u!4 &850661583
