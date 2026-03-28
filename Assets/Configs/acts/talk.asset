@@ -18,7 +18,7 @@ MonoBehaviour:
   actFactor: 1
   requiredActs: []
   requiredTimeSeconds: 12
-  fullFillAmount: 500000
+  fullFillAmount: 6
   requiredSkills:
   - skillName: talk
     skillLevel: 1

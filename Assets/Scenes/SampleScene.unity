@@ -910,7 +910,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skills:
   - skillName: talk
-    skillLevel: 1
+    skillLevel: 10
     skillType: 1
   - skillName: use
     skillLevel: 2
@@ -1130,9 +1130,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skills:
-  - skillName: Use
-    skillLevel: 4
-    skillType: 4
   - skillName: Physical Resistance
     skillLevel: 40
     skillType: 0
@@ -1144,7 +1141,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4cdad508bc1df1b45b4d652e6e2c7367, type: 2}
   - {fileID: 11400000, guid: 82a7cd558759a9f449f54a782eee9e75, type: 2}
   - {fileID: 11400000, guid: 4daedf455c61c3d448e25b0df7499f6e, type: 2}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 6ed13641f252736468225ac87ead86f9, type: 2}
   needsConfigs: []
   needsInitialValues: []
 --- !u!4 &850661583

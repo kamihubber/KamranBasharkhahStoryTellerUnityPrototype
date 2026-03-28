@@ -175,7 +175,6 @@ public class Act
       var gainSkillResult = await OnRequestGainSkills(this);
       if (!gainSkillResult)
       {
-         //should we call onfailed?
          OnActFailed?.Invoke(this);
          return;
       }

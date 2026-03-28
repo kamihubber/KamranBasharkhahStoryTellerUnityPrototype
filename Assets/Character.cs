@@ -258,7 +258,8 @@ public class Character : GameEntity
     //aligned with seeking comp?
     public override async Task<bool> Interact(GameEntity other, SkillComp? comp = null)
     {
-        ActConfig actConfig = regularGoapStrategy.GetInterAct(needsConfigs[0], _actsRepo, comp.Value, this, other);
+        
+        ActConfig actConfig = regularGoapStrategy.GetInterAct(new NeedConfig(), _actsRepo, comp, this, other);
 
         if (actConfig == null)
         {
@@ -277,7 +278,8 @@ public class Character : GameEntity
         tempact.OnActFailed += (act) => { result = false; };
         await tempact.Log(this.Name);
 
-        //await other.Interact(this);
+        if (comp != null)
+          await other.Interact(this,null);
         
         return result;
     }

@@ -10,22 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 878e1f0fcb47b2842bc8a2576028d7d8, type: 3}
-  m_Name: Shopping
+  m_Name: Resist
   m_EditorClassIdentifier: 
-  name: Shopping
+  name: Resist
   effects: []
   wisdomFactor: 1
   actFactor: 1
-  requiredActs:
-  - {fileID: 11400000, guid: df2baaf83b32d8047b64828f22c11a41, type: 2}
-  requiredTimeSeconds: 0
-  fullFillAmount: 0
-  requiredSkills:
-  - skillName: talk
-    skillLevel: 20
-    skillType: 1
+  requiredActs: []
+  requiredTimeSeconds: 1
+  fullFillAmount: 1
+  requiredSkills: []
   providingSkills:
-  - skillName: 
-    skillLevel: 8
-    skillType: 5
+  - skillName: physical resist
+    skillLevel: 2
+    skillType: 0
   components: []

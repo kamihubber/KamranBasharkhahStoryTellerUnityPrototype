@@ -116,7 +116,7 @@ public class RegularGoapStrategy : IGoaperStrategy
     //some skills like thinking might effect this process
     //intelligence might be a better name for thinking skill
 
-    public ActConfig GetInterAct(NeedConfig needsConfig, List<ActConfig> characterActs, SkillComp seekingComp, GameEntity self,
+    public ActConfig GetInterAct(NeedConfig needsConfig, List<ActConfig> characterActs, SkillComp? seekingComp, GameEntity self,
         GameEntity otherCharacterEntity)
     {
         //myabe check our staibility first, for now using traits but it should be mental state
@@ -155,7 +155,8 @@ public class RegularGoapStrategy : IGoaperStrategy
               //* can i do the act?
               //* can the other be subject of this act??
               //*** if the act gains the seeking comp?
-
+              ActConfig candidateAct = null;
+              
               self.Skills.Sort((comp, skillComp) =>
               {
                   return comp.skillLevel - skillComp.skillLevel;
@@ -166,22 +167,67 @@ public class RegularGoapStrategy : IGoaperStrategy
                   return comp.skillLevel - skillComp.skillLevel;
               });
 
-              ActConfig candidateAct = null;
-              foreach (var act in characterActs)
+              if (seekingComp == null)
               {
-                  if (act.ProvidingSkills.Count > 0)
+                  List<SkillComp> commonSkills = new List<SkillComp>();
+                  
+                  foreach (var skill in self.Skills)
                   {
-                      if (!act.ProvidingSkills.Any(skl => skl.skillType == seekingComp.skillType))
-                          continue;
+                      otherCharacterEntity.Skills.FindAll(skl => skl.skillType == skill.skillType).ForEach(skl => commonSkills.Add(skill));
+                  }
+                  
+                  SkillComp skillResult = new SkillComp();
+                  
+                  if (commonSkills.Count == 0)
+                  {
+                      SkillComp max;
+                      max = self.Skills[0];
+                      foreach (var s in self.Skills)
+                      {
+                          if (s.skillLevel > max.skillLevel)
+                              max = s;
+                      }
+                      skillResult = max;
+                  }
+                  else
+                  {
+                      SkillComp max;
+                      max = commonSkills[0];
+                      foreach (var cs in commonSkills)
+                      {
+                          if (cs.skillLevel > max.skillLevel)
+                              max = cs;
+                      }
+                      skillResult = max;
+                  }
+                  
+                  foreach (var act in characterActs)
+                  {
+                      if (act.RequiredSkills.Count > 0)
+                      {
+                          var allActsAcceptable = characterActs.FindAll(actr => actr.RequiredSkills.Any(rs => rs.skillType == skillResult.skillType));
+                          return allActsAcceptable.FirstOrDefault();
+                      }
+                  }
+              }
+              else
+              {
+                  foreach (var act in characterActs)
+                  {
+                      if (act.ProvidingSkills.Count > 0)
+                      {
+                          if (!act.ProvidingSkills.Any(skl => skl.skillType == seekingComp.Value.skillType))
+                              continue;
 
-                      float candiateskillammount = (candidateAct == null) ? 0 : candidateAct.ProvidingSkills
-                          .Find(skl => skl.skillType == seekingComp.skillType).skillLevel;
+                          float candiateskillammount = (candidateAct == null) ? 0 : candidateAct.ProvidingSkills
+                              .Find(skl => skl.skillType == seekingComp.Value.skillType).skillLevel;
                       
-                      float skillammount = act.ProvidingSkills
-                          .Find(skl => skl.skillType == seekingComp.skillType).skillLevel;
+                          float skillammount = act.ProvidingSkills
+                              .Find(skl => skl.skillType == seekingComp.Value.skillType).skillLevel;
 
-                      if ((candidateAct == null) || (candiateskillammount < skillammount))
-                          candidateAct = act;
+                          if ((candidateAct == null) || (candiateskillammount < skillammount))
+                              candidateAct = act;
+                      }
                   }
               }
 
