@@ -1,4 +1,19 @@
-﻿- last state : now we are choosing interact based on seeking component and acts providing skills , BUT , 
+﻿- a big mistake ? why should choose acts based on providing skills??
+ - can the act be applied to subject?(use/useable pair method for elements)
+ - 
+ - what if there is no providing act?
+ 
+ -omly 1 required skill is being processed?  
+ 
+ 
+- a project definitiion : we eneed something like nerual network , which , based on our final intention(need for example) 
+lists all providing entities , and all possible providing chain of acts from all of them ,
+and then scores these chains based on most success possiblility , and apply "emergant" factors (like mistake chance ...) 
+
+- finding target for an act other than interact target??
+ - consider final intention (probably current need) in seeking ??
+
+- last state : now we are choosing interact based on seeking component and acts providing skills , BUT , 
 we have to bring the other ones capability tfor being subject to that act
 ours dosent matter because even if we dont have the skill we seek it in task.log 
 

@@ -10,17 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 878e1f0fcb47b2842bc8a2576028d7d8, type: 3}
-  m_Name: attack
+  m_Name: Run
   m_EditorClassIdentifier: 
-  name: attack
-  effects:
-  - needConfig: {fileID: 11400000, guid: a0e412d4a7b8f024b9b2cec9ad5b95f6, type: 2}
-    amount: 0.2
+  name: 
+  effects: []
   wisdomFactor: 1
   actFactor: 1
-  requiredActs:
-  - {fileID: 11400000, guid: fab6daf8166bc934db7fd6d85545848a, type: 2}
-  requiredTimeSeconds: 1
-  fullFillAmount: 1
+  requiredActs: []
+  requiredTimeSeconds: 2
+  fullFillAmount: 2
   requiredSkills: []
+  providingSkills: []
   components: []

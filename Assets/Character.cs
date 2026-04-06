@@ -266,8 +266,17 @@ public class Character : GameEntity
             Debug.Log(name + " does not know what to do and just stares at some point for hours... ");
             return false;
         }
-        
-        Debug.Log(name + " is " + actConfig.Name + " with " + other.name );
+
+        string aboutPhrase;
+        if (comp == null)
+        {
+            aboutPhrase = "";
+        }
+        else
+        {
+            aboutPhrase = $" about { comp.Value.skillName } ";
+        }
+        Debug.Log(name + " is " + actConfig.Name + " with " + other.name + aboutPhrase);
         
         bool result = false;
         

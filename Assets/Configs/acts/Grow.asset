@@ -10,22 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 878e1f0fcb47b2842bc8a2576028d7d8, type: 3}
-  m_Name: Shopping
+  m_Name: Grow
   m_EditorClassIdentifier: 
-  name: Shopping
+  name: Grow
   effects: []
   wisdomFactor: 1
   actFactor: 1
-  requiredActs:
-  - {fileID: 11400000, guid: df2baaf83b32d8047b64828f22c11a41, type: 2}
-  requiredTimeSeconds: 0
-  fullFillAmount: 0
+  requiredActs: []
+  requiredTimeSeconds: 12
+  fullFillAmount: 12
   requiredSkills:
-  - skillName: talk
-    skillLevel: 20
-    skillType: 1
+  - skillName: farm
+    skillLevel: 12
+    skillType: 5
+  - skillName: farm science
+    skillLevel: 2
+    skillType: 11
   providingSkills:
-  - skillName: 
-    skillLevel: 8
+  - skillName: farm sience
+    skillLevel: 1
+    skillType: 11
+  - skillName: farm experience
+    skillLevel: 1
     skillType: 5
   components: []

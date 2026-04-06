@@ -10,12 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 878e1f0fcb47b2842bc8a2576028d7d8, type: 3}
-  m_Name: politics
+  m_Name: Learn
   m_EditorClassIdentifier: 
-  name: do politics
+  name: Learn
   effects: []
   wisdomFactor: 1
   actFactor: 1
   requiredActs: []
-  requiredTimeSeconds: 10
-  fullFillAmount: 20
+  requiredTimeSeconds: 12
+  fullFillAmount: 22
+  requiredSkills:
+  - skillName: talk
+    skillLevel: 5
+    skillType: 1
+  providingSkills:
+  - skillName: science
+    skillLevel: 15
+    skillType: 11
+  components: []

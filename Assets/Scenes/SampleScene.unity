@@ -890,7 +890,7 @@ GameObject:
   - component: {fileID: 626489648}
   - component: {fileID: 626489647}
   m_Layer: 0
-  m_Name: karim
+  m_Name: kami
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -910,31 +910,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skills:
   - skillName: talk
-    skillLevel: 10
+    skillLevel: 1
     skillType: 1
-  - skillName: use
-    skillLevel: 2
-    skillType: 4
+  - skillName: buy
+    skillLevel: 1
+    skillType: 2
   name: karim
   _actsRepo:
-  - {fileID: 11400000, guid: 4cdad508bc1df1b45b4d652e6e2c7367, type: 2}
-  - {fileID: 11400000, guid: c427f88c06b15d64e98764cad3542308, type: 2}
-  - {fileID: 11400000, guid: 23922c26422aff14abe84a3a91f59f02, type: 2}
-  - {fileID: 11400000, guid: 845aacbcb0e2c034e9de9c6dbf96a898, type: 2}
-  - {fileID: 11400000, guid: 40c65e954640af149ba87e84601ce7e3, type: 2}
-  - {fileID: 11400000, guid: 89cb8042d731c054c9b8373ffd0628b4, type: 2}
-  - {fileID: 11400000, guid: 4cda1861cc72fba4d96b6d95420d1fcc, type: 2}
-  - {fileID: 11400000, guid: 4daedf455c61c3d448e25b0df7499f6e, type: 2}
+  - {fileID: 11400000, guid: 4b5117cec936069418dbefcbc2d3374c, type: 2}
   - {fileID: 11400000, guid: 82a7cd558759a9f449f54a782eee9e75, type: 2}
-  - {fileID: 11400000, guid: 262e2459d11e5a14b94f8ac7b41eef8f, type: 2}
-  - {fileID: 11400000, guid: b4b4792c5b1c1414cb000d9cd3911abc, type: 2}
-  - {fileID: 11400000, guid: ef226a96889ff574ba0dd703d83a43db, type: 2}
-  - {fileID: 11400000, guid: a29aef88693f4e34cbe7f4fac6fba20d, type: 2}
+  - {fileID: 11400000, guid: 89cb8042d731c054c9b8373ffd0628b4, type: 2}
+  - {fileID: 11400000, guid: a4c66c834473f3448a6da33ede402c7a, type: 2}
+  - {fileID: 11400000, guid: 41db293445abcf54585e7a1de2fef02c, type: 2}
+  - {fileID: 11400000, guid: fa6515cf987187c47bec626c47e1d7a4, type: 2}
+  - {fileID: 11400000, guid: 7f354953656a21a4182b2afe630c4669, type: 2}
+  - {fileID: 11400000, guid: 0f5521d8f35e3dc42aefe8d21b12a784, type: 2}
   needsConfigs:
+  - {fileID: 11400000, guid: a11f0899458f36042afbf223e623ff27, type: 2}
   - {fileID: 11400000, guid: 4d3e76e83da6f974fb59592272d1c2d0, type: 2}
   needsInitialValues:
+  - needConfig: {fileID: 11400000, guid: a11f0899458f36042afbf223e623ff27, type: 2}
+    amount: 0
   - needConfig: {fileID: 11400000, guid: 4d3e76e83da6f974fb59592272d1c2d0, type: 2}
-    amount: 1
+    amount: 0
 --- !u!4 &626489648
 Transform:
   m_ObjectHideFlags: 0
@@ -1100,6 +1098,61 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 733769725}
   m_CullTransparentMesh: 1
+--- !u!1 &771207759
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 771207761}
+  - component: {fileID: 771207760}
+  m_Layer: 0
+  m_Name: Biscuit
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &771207760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 771207759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d83d78ff97c45f44a46b573260c3ad5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skills:
+  - skillName: food
+    skillLevel: 7
+    skillType: 12
+  - skillName: buy
+    skillLevel: 7
+    skillType: 2
+  name: biscuit
+  _actsRepo: []
+  needsConfigs: []
+  needsInitialValues: []
+--- !u!4 &771207761
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 771207759}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &850661581
 GameObject:
   m_ObjectHideFlags: 0
@@ -1130,18 +1183,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skills:
-  - skillName: Physical Resistance
-    skillLevel: 40
-    skillType: 0
-  - skillName: farming
-    skillLevel: 1
-    skillType: 5
+  - skillName: wealth
+    skillLevel: 32
+    skillType: 2
   name: land
-  _actsRepo:
-  - {fileID: 11400000, guid: 4cdad508bc1df1b45b4d652e6e2c7367, type: 2}
-  - {fileID: 11400000, guid: 82a7cd558759a9f449f54a782eee9e75, type: 2}
-  - {fileID: 11400000, guid: 4daedf455c61c3d448e25b0df7499f6e, type: 2}
-  - {fileID: 11400000, guid: 6ed13641f252736468225ac87ead86f9, type: 2}
+  _actsRepo: []
   needsConfigs: []
   needsInitialValues: []
 --- !u!4 &850661583
@@ -1287,7 +1333,7 @@ GameObject:
   - component: {fileID: 1051505684}
   - component: {fileID: 1051505683}
   m_Layer: 0
-  m_Name: parviz
+  m_Name: old farmer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1307,30 +1353,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skills:
   - skillName: talk
-    skillLevel: 12
+    skillLevel: 8
     skillType: 1
-  - skillName: use
-    skillLevel: 4
-    skillType: 4
-  - skillName: fight
+  - skillName: strength
     skillLevel: 2
+    skillType: 0
+  - skillName: trade
+    skillLevel: 15
+    skillType: 2
+  - skillName: placeable
+    skillLevel: 5
+    skillType: 3
+  - skillName: useable
+    skillLevel: 1
+    skillType: 4
+  - skillName: farming
+    skillLevel: 10
+    skillType: 5
+  - skillName: tricks
+    skillLevel: 8
+    skillType: 6
+  - skillName: fight
+    skillLevel: 6
     skillType: 7
   name: parviz
-  _actsRepo:
-  - {fileID: 11400000, guid: 4cdad508bc1df1b45b4d652e6e2c7367, type: 2}
-  - {fileID: 11400000, guid: c427f88c06b15d64e98764cad3542308, type: 2}
-  - {fileID: 11400000, guid: 23922c26422aff14abe84a3a91f59f02, type: 2}
-  - {fileID: 11400000, guid: 845aacbcb0e2c034e9de9c6dbf96a898, type: 2}
-  - {fileID: 11400000, guid: 40c65e954640af149ba87e84601ce7e3, type: 2}
-  - {fileID: 11400000, guid: 89cb8042d731c054c9b8373ffd0628b4, type: 2}
-  - {fileID: 11400000, guid: 4cda1861cc72fba4d96b6d95420d1fcc, type: 2}
-  - {fileID: 11400000, guid: 4daedf455c61c3d448e25b0df7499f6e, type: 2}
-  - {fileID: 11400000, guid: 82a7cd558759a9f449f54a782eee9e75, type: 2}
-  - {fileID: 11400000, guid: 262e2459d11e5a14b94f8ac7b41eef8f, type: 2}
-  - {fileID: 11400000, guid: b4b4792c5b1c1414cb000d9cd3911abc, type: 2}
-  - {fileID: 11400000, guid: ef226a96889ff574ba0dd703d83a43db, type: 2}
-  needsConfigs:
-  - {fileID: 11400000, guid: 4d3e76e83da6f974fb59592272d1c2d0, type: 2}
+  _actsRepo: []
+  needsConfigs: []
   needsInitialValues:
   - needConfig: {fileID: 11400000, guid: 4d3e76e83da6f974fb59592272d1c2d0, type: 2}
     amount: 1
@@ -1507,6 +1555,60 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1265667650}
   m_CullTransparentMesh: 1
+--- !u!1 &1610042644
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1610042646}
+  - component: {fileID: 1610042645}
+  m_Layer: 0
+  m_Name: jimmy the Chicken
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1610042645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1610042644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d83d78ff97c45f44a46b573260c3ad5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skills:
+  - skillName: food
+    skillLevel: 22
+    skillType: 12
+  name: jimmy the chicken
+  _actsRepo:
+  - {fileID: 11400000, guid: b9edf1f03c1533740b65315c133c8bbb, type: 2}
+  - {fileID: 11400000, guid: a0839f01125813c4b910b222dc977f4a, type: 2}
+  needsConfigs: []
+  needsInitialValues: []
+--- !u!4 &1610042646
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1610042644}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1629071377
 GameObject:
   m_ObjectHideFlags: 0
@@ -1594,6 +1696,73 @@ MonoBehaviour:
   consoleText: {fileID: 286999915}
   scrollRect: {fileID: 2146798864}
   maxLines: 300
+--- !u!1 &1709567318
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1709567320}
+  - component: {fileID: 1709567319}
+  m_Layer: 0
+  m_Name: Blonde Bitch
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1709567319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1709567318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d83d78ff97c45f44a46b573260c3ad5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skills:
+  - skillName: talk
+    skillLevel: 8
+    skillType: 1
+  - skillName: useable
+    skillLevel: 14
+    skillType: 4
+  - skillName: place
+    skillLevel: 14
+    skillType: 3
+  - skillName: fight
+    skillLevel: 14
+    skillType: 7
+  - skillName: fizik
+    skillLevel: 7
+    skillType: 8
+  name: blonde bitch
+  _actsRepo:
+  - {fileID: 11400000, guid: 4b5117cec936069418dbefcbc2d3374c, type: 2}
+  - {fileID: 11400000, guid: 89cb8042d731c054c9b8373ffd0628b4, type: 2}
+  - {fileID: 11400000, guid: 82a7cd558759a9f449f54a782eee9e75, type: 2}
+  needsConfigs: []
+  needsInitialValues: []
+--- !u!4 &1709567320
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1709567318}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1725633996
 GameObject:
   m_ObjectHideFlags: 0
@@ -2028,6 +2197,58 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1879033710}
   m_CullTransparentMesh: 1
+--- !u!1 &1997968495
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1997968497}
+  - component: {fileID: 1997968496}
+  m_Layer: 0
+  m_Name: Gym
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1997968496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1997968495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d83d78ff97c45f44a46b573260c3ad5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skills:
+  - skillName: fiziks
+    skillLevel: 22
+    skillType: 0
+  name: Gym
+  _actsRepo: []
+  needsConfigs: []
+  needsInitialValues: []
+--- !u!4 &1997968497
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1997968495}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2008149581
 GameObject:
   m_ObjectHideFlags: 0
@@ -2107,6 +2328,73 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2008149581}
   m_CullTransparentMesh: 1
+--- !u!1 &2017658500
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2017658502}
+  - component: {fileID: 2017658501}
+  m_Layer: 0
+  m_Name: Banafshe
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2017658501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2017658500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d83d78ff97c45f44a46b573260c3ad5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skills:
+  - skillName: fizik
+    skillLevel: 5
+    skillType: 8
+  - skillName: strength
+    skillLevel: 8
+    skillType: 0
+  - skillName: useable
+    skillLevel: 8
+    skillType: 4
+  - skillName: talkable
+    skillLevel: 8
+    skillType: 1
+  - skillName: placeable
+    skillLevel: 14
+    skillType: 3
+  name: banafshe
+  _actsRepo:
+  - {fileID: 11400000, guid: 4b5117cec936069418dbefcbc2d3374c, type: 2}
+  - {fileID: 11400000, guid: 89cb8042d731c054c9b8373ffd0628b4, type: 2}
+  - {fileID: 11400000, guid: 82a7cd558759a9f449f54a782eee9e75, type: 2}
+  needsConfigs: []
+  needsInitialValues: []
+--- !u!4 &2017658502
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2017658500}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2038380207
 GameObject:
   m_ObjectHideFlags: 0
@@ -2722,4 +3010,9 @@ SceneRoots:
   - {fileID: 1051505684}
   - {fileID: 626489648}
   - {fileID: 850661583}
+  - {fileID: 1997968497}
+  - {fileID: 771207761}
+  - {fileID: 1610042646}
+  - {fileID: 1709567320}
+  - {fileID: 2017658502}
   - {fileID: 283309284}

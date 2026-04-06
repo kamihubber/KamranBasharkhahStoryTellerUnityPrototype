@@ -26,7 +26,7 @@ public struct SkillComp
 
 public enum SkillType
 {
-   physical,
+   physicalwork,
    talkable,
    tradable,
    placeable,
@@ -34,6 +34,11 @@ public enum SkillType
    farming,
    politics,
    fighting,
+   romance,
+   medical,
+   caring,
+   science,
+   food
 }
 
 [CreateAssetMenu(menuName = "Act")]

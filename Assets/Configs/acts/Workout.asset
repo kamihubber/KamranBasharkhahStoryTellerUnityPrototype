@@ -10,12 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 878e1f0fcb47b2842bc8a2576028d7d8, type: 3}
-  m_Name: Working
+  m_Name: Workout
   m_EditorClassIdentifier: 
-  name: Working
-  effects:
-  - needConfig: {fileID: 11400000, guid: 4d3e76e83da6f974fb59592272d1c2d0, type: 2}
-    amount: -4
+  name: Workout
+  effects: []
   wisdomFactor: 1
   actFactor: 1
   requiredActs: []
+  requiredTimeSeconds: 5
+  fullFillAmount: 12
+  requiredSkills: []
+  providingSkills:
+  - skillName: fizik
+    skillLevel: 22
+    skillType: 0
+  components: []
