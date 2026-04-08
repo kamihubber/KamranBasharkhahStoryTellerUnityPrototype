@@ -246,7 +246,8 @@ public class Character : GameEntity
                     //todo : gain??
                 }
 
-                return interactResult;
+                if (!interactResult)
+                    return false;
             }
         }
         
