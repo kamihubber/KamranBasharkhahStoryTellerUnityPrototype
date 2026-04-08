@@ -19,7 +19,10 @@ MonoBehaviour:
   requiredActs: []
   requiredTimeSeconds: 0
   fullFillAmount: 0
-  requiredSkills: []
+  requiredSkills:
+  - skillName: use
+    skillLevel: 2
+    skillType: 4
   providingSkills:
   - skillName: food
     skillLevel: 8

@@ -25,5 +25,8 @@ MonoBehaviour:
   - skillName: fizik
     skillLevel: 10
     skillType: 0
+  - skillName: a place
+    skillLevel: 10
+    skillType: 3
   providingSkills: []
   components: []

@@ -167,22 +167,12 @@ public class RegularGoapStrategy : IGoaperStrategy
                   return comp.skillLevel - skillComp.skillLevel;
               });
 
-              if (seekingComp == null)
-              {
-                  return GetInterActConfigWithCommonSkills(characterActs, self, otherCharacterEntity);
-              }
-              else
-              {
-                  candidateAct = GetInterActConfigBasedOnSeekingSkills(characterActs, self, otherCharacterEntity, seekingComp.Value);
-                  
-                  if (candidateAct == null)
-                  {
-                      foreach (var act in characterActs)
-                      {
-                          return GetInterActConfigWithCommonSkills(characterActs, self, otherCharacterEntity);
-                      }
-                  }
-              }
+              List<ActConfig> candidateActs = new List<ActConfig>();
+              candidateActs.Add(GetInterActConfigBasedOnSeekingAndSubjectSkills(characterActs, self, otherCharacterEntity, seekingComp));
+              candidateActs.Add(GetInterActConfigWithCommonSkills(characterActs, self, otherCharacterEntity));
+              candidateActs.Add(GetInterActConfigBasedOnSeekingSkills(characterActs, self, otherCharacterEntity, seekingComp));
+              
+              candidateAct = candidateActs.Find(ca => ca != null);
 
               return candidateAct;
 
@@ -198,22 +188,59 @@ public class RegularGoapStrategy : IGoaperStrategy
         return null;
     }
 
-    private ActConfig GetInterActConfigBasedOnSeekingSkills(List<ActConfig> characterActs, GameEntity self,
-        GameEntity otherCharacterEntity, SkillComp seekingComp)
+    private ActConfig GetInterActConfigBasedOnSeekingAndSubjectSkills(List<ActConfig> characterActs, GameEntity self,
+        GameEntity otherCharacterEntity, SkillComp? seekingComp)
     {
+        if (!seekingComp.HasValue)
+            return null;
+        
+        foreach (var act in characterActs)
+        {
+            //can be done on subject/other?
+            //todo:improve syntax,possible bug
+            bool canBeDoneBySubject = true;
+            foreach (var rSkill in act.RequiredSkills)
+            {
+                if (!otherCharacterEntity.Skills.Any(skl => skl.skillType == rSkill.skillType))
+                {
+                    canBeDoneBySubject = false;
+                    break;
+                }
+            }
+            
+            if (!canBeDoneBySubject)
+                continue;
+            //
+            
+            bool hasSeekingSkill = act.ProvidingSkills.Any(rs => rs.skillType == seekingComp.Value.skillType);
+            if (!hasSeekingSkill)
+                continue;
+            
+            return act;
+        }
+
+        return null;
+    }
+
+    private ActConfig GetInterActConfigBasedOnSeekingSkills(List<ActConfig> characterActs, GameEntity self,
+        GameEntity otherCharacterEntity, SkillComp? seekingComp)
+    {
+        if (!seekingComp.HasValue)
+            return null;
+        
         ActConfig candidateAct = null;
         foreach (var act in characterActs)
         {
             if (act.ProvidingSkills.Count > 0)
             {
-                if (!act.ProvidingSkills.Any(skl => skl.skillType == seekingComp.skillType))
+                if (!act.ProvidingSkills.Any(skl => skl.skillType == seekingComp.Value.skillType))
                     continue;
 
                 float candiateskillammount = (candidateAct == null) ? 0 : candidateAct.ProvidingSkills
-                    .Find(skl => skl.skillType == seekingComp.skillType).skillLevel;
+                    .Find(skl => skl.skillType == seekingComp.Value.skillType).skillLevel;
                       
                 float skillammount = act.ProvidingSkills
-                    .Find(skl => skl.skillType == seekingComp.skillType).skillLevel;
+                    .Find(skl => skl.skillType == seekingComp.Value.skillType).skillLevel;
 
                 if ((candidateAct == null) || (candiateskillammount < skillammount))
                     candidateAct = act;
@@ -224,17 +251,21 @@ public class RegularGoapStrategy : IGoaperStrategy
 
     }
 
+    //probably common is not needed , subject is enough
     private ActConfig GetInterActConfigWithCommonSkills(List<ActConfig> characterActs, GameEntity self, GameEntity otherCharacterEntity)
     {
         List<SkillComp> commonSkills = new List<SkillComp>();
                   
         foreach (var skill in self.Skills)
         {
-            otherCharacterEntity.Skills.FindAll(skl => skl.skillType == skill.skillType).ForEach(skl => commonSkills.Add(skill));
+            //todo : check this
+            commonSkills = otherCharacterEntity.Skills;
+            //otherCharacterEntity.Skills.FindAll(skl => skl.skillType == skill.skillType).ForEach(skl => commonSkills.Add(skill));
         }
                   
         SkillComp skillResult = new SkillComp();
-                  
+             
+        //todo : check  this ???
         if (commonSkills.Count == 0)
         {
             SkillComp max;

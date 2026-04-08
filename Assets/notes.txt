@@ -1,4 +1,11 @@
-﻿1/23/2026 
+﻿4/8/2026
+- a project definitiion : we eneed something like nerual network , which , based on our final intention(need for example) 
+lists all providing entities , and all possible providing chain of acts from all of them ,
+and then scores these chains based on most success possiblility , and apply "emergant" factors (like mistake chance ...) 
+
+- 
+
+1/23/2026 
 dynamic method 
 - how to have an "output" for each act with a "Score toward Goal" ?
  - we choose an act -> evalute output

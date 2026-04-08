@@ -6,3 +6,6 @@ this can make the character to change its step or add another external step to i
 ** this is briliant both technically and design BUT its also full simulation mode!) 
 also each intention can randomly result in an act before the total is determined 
 , and then the total also can or can not result to an act, this creates good level of randomness , emergant and reality .
+
+- finding target for an act other than interact target??
+ - consider final intention (probably current need) in seeking ??

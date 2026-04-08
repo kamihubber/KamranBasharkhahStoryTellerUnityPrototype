@@ -915,7 +915,10 @@ MonoBehaviour:
   - skillName: buy
     skillLevel: 1
     skillType: 2
-  name: karim
+  - skillName: use
+    skillLevel: 4
+    skillType: 4
+  name: kami
   _actsRepo:
   - {fileID: 11400000, guid: 4b5117cec936069418dbefcbc2d3374c, type: 2}
   - {fileID: 11400000, guid: 82a7cd558759a9f449f54a782eee9e75, type: 2}
@@ -927,7 +930,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0f5521d8f35e3dc42aefe8d21b12a784, type: 2}
   needsConfigs:
   - {fileID: 11400000, guid: a11f0899458f36042afbf223e623ff27, type: 2}
-  - {fileID: 11400000, guid: 4d3e76e83da6f974fb59592272d1c2d0, type: 2}
   needsInitialValues:
   - needConfig: {fileID: 11400000, guid: a11f0899458f36042afbf223e623ff27, type: 2}
     amount: 0
@@ -2230,6 +2232,9 @@ MonoBehaviour:
   - skillName: fiziks
     skillLevel: 22
     skillType: 0
+  - skillName: a place
+    skillLevel: 22
+    skillType: 3
   name: Gym
   _actsRepo: []
   needsConfigs: []
