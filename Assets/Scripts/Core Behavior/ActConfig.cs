@@ -38,7 +38,8 @@ public enum SkillType
    medical,
    caring,
    science,
-   food
+   food,
+   huntable
 }
 
 [CreateAssetMenu(menuName = "Act")]
@@ -78,6 +79,8 @@ public class ActConfig : ScriptableObject
 
    public List<SkillComp> ProvidingSkills => providingSkills;
 
+   public bool ShouldEngageSubjectOwner => shouldEngageSubjectOwner;
+
    [SerializeField] private float requiredTimeSeconds;
    [SerializeField] private float fullFillAmount;
    
@@ -85,6 +88,8 @@ public class ActConfig : ScriptableObject
    [SerializeField] List<SkillComp> providingSkills = new List<SkillComp>();
    
    [SerializeField] List<SkillComp> components = new List<SkillComp>();
+
+   [SerializeField] private bool shouldEngageSubjectOwner;
 }
 
 

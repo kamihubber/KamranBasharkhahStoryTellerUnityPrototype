@@ -1,10 +1,20 @@
-﻿- last state : we are creating a list of candidate acts for interact and picking the first one which is not null
+﻿- for better functional test , add moving to subject and a text baloon on character
+
+* important , check
+- (concurrency + distract + loop crash fix : having a list of tasks for each need -> each seeking skill adds a record of act,target,reason -> then go through list 
+-> distraction can cause unplanned switches among need action lists,can be based on traits)
+
+
+- last state : we are creating a list of candidate acts for interact and picking the first one which is not null
 , next : we add false/mistake factor (casued by lots of things from envoirment effect to tratis , decisions , randomness....)
 and then we add this factor to our index of choose in the candidates list(or something like that) to CREATE EMERGANT.  
 
+- act -> subject required skills vs act.requiredskills??
+
 - additional goap stategy?
 
-(-  subject skills vs object skills, this might be in tight connection with "owners of things")
+(- * subject skills vs object skills, this might be in tight connection with "owners of things"
+  also , how to seprate subject skills , elements vs skills , ...)
  
 - gained skill should be added  ??  
  

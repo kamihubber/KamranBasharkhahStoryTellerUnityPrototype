@@ -1,4 +1,14 @@
-﻿4/8/2026
+﻿06102026
+//warning : loop stuck crash fix for now ! added a list(chain) of acts being called in chain  to provide skills for aa top act
+              // and exclude repeated ones to avoid a loop
+              
+crash problem solution offer : 
+in our priority list of acts we can prioritize the acts that we already have skills for??
+
+- we might be able to add more conditions for choosing acts , like if something(subject) has owner then acts with owner are prioritized
+want place -> choose land -> if land has owner trade it if not own it
+
+4/8/2026
 - a project definitiion : we eneed something like nerual network , which , based on our final intention(need for example) 
 lists all providing entities , and all possible providing chain of acts from all of them ,
 and then scores these chains based on most success possiblility , and apply "emergant" factors (like mistake chance ...) 
