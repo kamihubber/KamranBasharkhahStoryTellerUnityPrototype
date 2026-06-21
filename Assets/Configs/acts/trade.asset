@@ -26,5 +26,6 @@ MonoBehaviour:
   providingSkills:
   - skillName: Trade
     skillLevel: 22
-    skillType: 2
+    skillType: 14
   components: []
+  shouldEngageSubjectOwner: 1

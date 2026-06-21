@@ -19,9 +19,13 @@ MonoBehaviour:
   requiredActs: []
   requiredTimeSeconds: 5
   fullFillAmount: 12
-  requiredSkills: []
+  requiredSkills:
+  - skillName: gudrat
+    skillLevel: 4
+    skillType: 0
   providingSkills:
-  - skillName: fizik
+  - skillName: gudrat e bishtar
     skillLevel: 22
     skillType: 0
   components: []
+  shouldEngageSubjectOwner: 0

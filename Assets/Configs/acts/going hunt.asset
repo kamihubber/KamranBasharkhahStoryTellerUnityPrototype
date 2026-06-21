@@ -20,11 +20,12 @@ MonoBehaviour:
   requiredTimeSeconds: 0
   fullFillAmount: 0
   requiredSkills:
-  - skillName: use
+  - skillName: hunt
     skillLevel: 2
-    skillType: 4
+    skillType: 13
   providingSkills:
   - skillName: food
     skillLevel: 8
     skillType: 12
   components: []
+  shouldEngageSubjectOwner: 0

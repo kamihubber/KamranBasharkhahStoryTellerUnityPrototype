@@ -28,5 +28,9 @@ MonoBehaviour:
   - skillName: a place
     skillLevel: 10
     skillType: 3
-  providingSkills: []
+  providingSkills:
+  - skillName: love
+    skillLevel: 4
+    skillType: 10
   components: []
+  shouldEngageSubjectOwner: 0

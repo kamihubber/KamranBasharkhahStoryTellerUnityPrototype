@@ -13,12 +13,21 @@ MonoBehaviour:
   m_Name: Run
   m_EditorClassIdentifier: 
   name: 
-  effects: []
+  effects:
+  - needConfig: {fileID: 0}
+    amount: 0
   wisdomFactor: 1
   actFactor: 1
   requiredActs: []
   requiredTimeSeconds: 2
   fullFillAmount: 2
-  requiredSkills: []
-  providingSkills: []
+  requiredSkills:
+  - skillName: gudrat
+    skillLevel: 8
+    skillType: 0
+  providingSkills:
+  - skillName: gudrat e jang
+    skillLevel: 4
+    skillType: 7
   components: []
+  shouldEngageSubjectOwner: 0

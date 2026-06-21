@@ -22,11 +22,13 @@ MonoBehaviour:
   requiredTimeSeconds: 12
   fullFillAmount: 44
   requiredSkills:
-  - skillName: Wealth
+  - skillName: wealth
     skillLevel: 10
-    skillType: 2
-  - skillName: a place
-    skillLevel: 10
-    skillType: 3
+    skillType: 14
+  - skillName: attractivenesss
+    skillLevel: 20
+    skillType: 0
   providingSkills: []
   components: []
+  shouldEngageSubjectOwner: 0
+  needsSubject: 1

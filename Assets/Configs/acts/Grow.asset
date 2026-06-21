@@ -34,3 +34,4 @@ MonoBehaviour:
     skillLevel: 1
     skillType: 5
   components: []
+  shouldEngageSubjectOwner: 1
