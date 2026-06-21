@@ -1,4 +1,10 @@
-﻿- for better functional test , add moving to subject and a text baloon on character
+﻿-,act subject,react log,body interact text reset
+
+-refacotr ? ; move gainskill and subacts outside act.log ,( this probably results in parrallell lists of tasks which is good for disstraction)
+
+- isprocessing for each need -> need distraction
+
+- subject qualifications for an act,what does a woman want/expects for being proposed?
 
 * important , check
 - (concurrency + distract + loop crash fix : having a list of tasks for each need -> each seeking skill adds a record of act,target,reason -> then go through list 
@@ -12,6 +18,7 @@ and then we add this factor to our index of choose in the candidates list(or som
 - act -> subject required skills vs act.requiredskills??
 
 - additional goap stategy?
+-what should or should not be in strategy? does goap strategy need seeking , finding subject or any other strategy ?
 
 (- * subject skills vs object skills, this might be in tight connection with "owners of things"
   also , how to seprate subject skills , elements vs skills , ...)
