@@ -24,17 +24,24 @@ public class Body : MonoBehaviour
         
     }
 
-    public void Interact(GameEntity subject, Act act, SkillComp skillComp)
+    public void Interact(GameEntity subject, Act act, SkillComp? skillComp)
     {
-        Debug.Log($"Body Interact with {subject.name}");
+        Debug.Log($"Body Interact with {subject.name} using {act.Name}");
         MoveToSubject(subject.Body.gameObject);
-        ShowDialougeBaloon($"i am doing {act.Name} with {subject.name} for {skillComp.skillType}");
+        
+        if (skillComp.HasValue)
+          ShowDialougeBaloon($"i am doing {act.Name} with {subject.name} for {skillComp.Value.skillType}");
+        else
+        {
+            ShowDialougeBaloon($"i am doing {act.Name} with {subject.name} in react");
+        }
     }
 
-    private void ShowDialougeBaloon(string text)
+    public void ShowDialougeBaloon(string text)
     {
         dialougeBaloon.SetActive(true);
         dialougeText.text = text;
+        Debug.Log(text);
     }
     
     private void HideDialougeBaloon()
@@ -50,6 +57,8 @@ public class Body : MonoBehaviour
 
     private void MoveToSubject(GameObject subject)
     {
-        transform.DOMove(subject.transform.position, 5);
+        Vector3 targetPos = subject.transform.position;
+        targetPos.x = targetPos.x - 2;
+        transform.DOMove(targetPos, 5);
     }
 }
