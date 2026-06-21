@@ -39,7 +39,8 @@ public enum SkillType
    caring,
    science,
    food,
-   huntable
+   huntable,
+   wealth
 }
 
 [CreateAssetMenu(menuName = "Act")]
@@ -81,6 +82,12 @@ public class ActConfig : ScriptableObject
 
    public bool ShouldEngageSubjectOwner => shouldEngageSubjectOwner;
 
+   public bool NeedsSubject
+   {
+      get => needsSubject;
+      set => needsSubject = value;
+   }
+
    [SerializeField] private float requiredTimeSeconds;
    [SerializeField] private float fullFillAmount;
    
@@ -90,6 +97,8 @@ public class ActConfig : ScriptableObject
    [SerializeField] List<SkillComp> components = new List<SkillComp>();
 
    [SerializeField] private bool shouldEngageSubjectOwner;
+   
+   [SerializeField] private bool needsSubject;
 }
 
 
@@ -125,6 +134,11 @@ public class Act
    public event Action<Act> OnActDone;
    public event Action<Act> OnActFailed;
    public bool _isFailed;
+   
+   public event Action<Act> OnActProcessUpdate;
+   
+   //todo : this should be probably out of this class
+   public event Action<Act> OnActTryProcessUpdate;
 
    private float _requiredJobTimeSeconds;
    private float _fullFillAmount;
@@ -134,12 +148,32 @@ public class Act
    List<SkillComp> providingSkills = new List<SkillComp>();
 
    public event Func<Act, Task<bool>> OnRequestGainSkills;
+   
+   private bool needsSubject;
+   
+   private GameEntity subjectEntity;
+   
+   public bool HasSubject => SubjectEntity != null;
 
-   public Act(ActConfig config, string name, Act parentAct)
+   public GameEntity SubjectEntity
+   {
+      get => subjectEntity;
+      set => subjectEntity = value;
+   }
+
+   public bool NeedsSubject
+   {
+      get => needsSubject;
+      set => needsSubject = value;
+   }
+
+   public Act(ActConfig config, string name, Act parentAct, GameEntity subject = null)
    {
       this.config = config;
       this.name = name;
       _parentAct = parentAct;
+      this.NeedsSubject = config.NeedsSubject;
+      this.SubjectEntity = subject;
 
       if (config.RequiredActs != null && config.RequiredActs.Count > 0)
       {
@@ -169,13 +203,18 @@ public class Act
    }
    
    
-   public async Task Log(string prefix)
+   public async Task Log(string prefix, CancellationToken token, GameEntity subject = null)
    {
       if (_isFailed)
          return;
       
+      OnActTryProcessUpdate?.Invoke(this);
+      //Debug.Log("trying");
+      
       //are we ignoring subacts results?!
-      bool subActsResult = await ProcessSubActs(prefix);
+      //todo : shouldnt subacts and gainskills be done outside act performnce(log) ?
+      //like before that ?like a qualification?
+      bool subActsResult = await ProcessSubActs(prefix, token);
       if (!subActsResult)
       {
          OnActFailed?.Invoke(this);
@@ -189,6 +228,21 @@ public class Act
          return;
       }
 
+      if (NeedsSubject)
+      {
+         if (subject == null)
+         {
+            OnActFailed?.Invoke(this);
+            return;
+         }
+         else
+         {
+            
+         }
+            
+      }
+
+      _requiredJobTimeSeconds = 0;
       while (_requiredJobTimeSeconds < config.RequiredTimeSeconds)
       {
          //if log
@@ -198,11 +252,15 @@ public class Act
          {
             Debug.Log($"{prefix} is doing {name} in order to prepare for {_parentAct.name}");
          }
+         
+         OnActProcessUpdate?.Invoke(this);
          //
          
          _requiredJobTimeSeconds += Time.deltaTime;
          // 0.001 can be an effort parameter for fail
          _fullFillAmount += Time.deltaTime * 10f;
+         
+         await Task.Yield();
       }
 
       if (IsFullfilled())
@@ -214,7 +272,7 @@ public class Act
       }
    }
    
-   public async Task<bool> ProcessSubActs(string prefix)
+   public async Task<bool> ProcessSubActs(string prefix, CancellationToken token)
    {
       bool result = true;
       
@@ -233,7 +291,7 @@ public class Act
             subact.OnActFailed += (subact) => { result = false; };
             //
             subact.OnRequestGainSkills = OnRequestGainSkills;
-            await subact.Log(prefix);
+            await subact.Log(prefix, token);
             return result;
          }
       }

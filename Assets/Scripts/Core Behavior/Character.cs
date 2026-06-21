@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Helpers;
 using UnityEngine;
@@ -122,9 +123,22 @@ public class Character : GameEntity
         //ProcessNeeds();
     }
 
-    private void Update()
+    private bool _isProcessing;
+    private async void Update()
     {
-        ProcessNeeds();
+        if (_isProcessing)
+            return;
+
+        _isProcessing = true;
+
+        try
+        {
+            await ProcessNeeds();
+        }
+        finally
+        {
+            _isProcessing = false;
+        }
     }
     
     bool ShouldProcessNeed(NeedConfig needsConfig, List<Need> characterNeeds)
@@ -135,8 +149,23 @@ public class Character : GameEntity
             
         return false;
     }
+    
+    //todo : replace with unitask
+    private CancellationTokenSource _cts;
 
-    private async void ProcessNeeds()
+    void Awake()
+    {
+        _cts = new CancellationTokenSource();
+    }
+
+    void OnDestroy()
+    {
+        _cts.Cancel();
+        _cts.Dispose();
+    }
+    //
+
+    private async Task ProcessNeeds()
     {
         var needConfigsToUpdate = needsConfigs.Where(nd => tasks.Keys.Contains(nd) == false);
 
@@ -158,8 +187,37 @@ public class Character : GameEntity
             task.Value.OnRequestGainSkills -= RequestGainSkills;
             task.Value.OnRequestGainSkills += RequestGainSkills;
 
+            task.Value.OnActProcessUpdate += act =>
+            {
+                if (act.HasSubject)
+                  Body.Interact(act.SubjectEntity, act, null);
+                else
+                {
+                    Body.Interact((GameEntity)this, act, null);
+                }
+            };
+
             regularGoapStrategy.ResetCurrentChain();
-            await task.Value.Log(name);
+
+            GameEntity actSubject = null;
+            //move this to goap strategy?
+            if (task.Value.NeedsSubject)
+            {
+                //find
+                //get the primary required skill
+                SkillComp max;
+                max = task.Value.RequiredSkills[0];
+                foreach (var cs in task.Value.RequiredSkills)
+                {
+                    if (cs.skillLevel > max.skillLevel)
+                        max = cs;
+                }
+
+                task.Value.SubjectEntity = SearchInteractionTargets(max);
+                actSubject = SearchInteractionTargets(max);
+            }
+            
+            await task.Value.Log(name, _cts.Token, actSubject);
             //todo : update on task done
             //UpdateNeedsFullFillScores(task.Value);
         }
@@ -295,15 +353,48 @@ public class Character : GameEntity
              //todo : temp
              Act tempact = new Act(actConfig, actConfig.Name, null);
              tempact.OnRequestGainSkills += RequestGainSkills;
-             tempact.OnActDone += (act) => { result = true; };
-             tempact.OnActFailed += (act) => { result = false; };
-             await tempact.Log(this.Name);
-        
-             //this still gives us a crash even after fix
-             Body.Interact(other, tempact, comp.Value);
+             tempact.OnActDone += (act) =>
+             {
+                 Body.ShowDialougeBaloon("...");
+                 result = true;
+             };
+             tempact.OnActFailed += (act) =>
+             {
+                 Body.ShowDialougeBaloon("...");
+                 result = false;
+             };
+             tempact.OnActProcessUpdate += (act) =>
+             {
+                 Body.Interact(other, tempact, comp);
+             };
+             tempact.OnActTryProcessUpdate += (act) =>
+             {
+                 if (comp == null)
+                 {
+                     Body.ShowDialougeBaloon($"i am trying to ract to {other} by {actConfig.Name}ing them");
+                 }
+                 else
+                 {
+                     Body.ShowDialougeBaloon($"i am trying to do {actConfig.Name} to {other} for some {comp.Value.skillName}");
+                 }
+             };
+             //await tempact.Log(this.Name);
+             Debug.Log($"START {Time.frameCount}");
+             
+             //todo : the concept of trying : if we refactor and pull oout the skills and subact qualifications out of act.log
+             //then we do it here before act.log (everywhere not just in this method)
+             //this can be the concept of trying to do something
+             //but also maybe we do it in act.log 
+             await tempact.Log(this.Name, _cts.Token);
+
+             Debug.Log($"END {Time.frameCount}");
+             
+             //Body.Interact(other, tempact, comp);
 
              if (comp != null)
-               await other.Interact(this,null);
+             {
+                 await other.Interact(this, null);
+             }
         }
         catch (Exception e)
         {
@@ -343,35 +434,83 @@ public class Character : GameEntity
         }
     }
 
+    // private GameEntity SearchInteractionTargets(SkillComp skill)
+    // {
+    //     // - a range factor
+    //     //     -a obscure factor
+    //     //     - a mistake factor
+    //     //     - all affected by mental factors
+    //         
+    //     bool any = FindObjectsOfType<GameEntity>()
+    //         .Where(ge => ge.Skills.Count(skl => skl.skillType == skill.skillType) > 0).Any();
+    //     
+    //     if (!any)
+    //         return null;
+    //
+    //     //todo : check : we are excluding ousrselves , check this again
+    //     var candidateInteractionGoals = FindObjectsOfType<GameEntity>()
+    //         .Where(ge => ge.Skills.Count(skl => skl.skillType == skill.skillType) > 0).Where(ge => ge != this).ToList();
+    //
+    //     if (candidateInteractionGoals.Count <= 0)
+    //         return null;
+    //
+    //     var maxGameEntity = candidateInteractionGoals[0];
+    //     var maxSkillValue = maxGameEntity.Skills.Find(skl => skl.skillType == skill.skillType).skillLevel;
+    //     foreach (GameEntity g in candidateInteractionGoals)
+    //     {
+    //         var gSkillLevel = g.Skills.Find(skl => skl.skillType == skill.skillType).skillLevel;
+    //         if ( gSkillLevel > maxSkillValue)
+    //         {
+    //             maxGameEntity = g;
+    //             maxSkillValue = gSkillLevel;
+    //         }
+    //     }
+    //     
+    //     return maxGameEntity;
+    // }
+    
     private GameEntity SearchInteractionTargets(SkillComp skill)
     {
-        // - a range factor
-        //     -a obscure factor
-        //     - a mistake factor
-        //     - all affected by mental factors
-            
-        bool any = FindObjectsOfType<GameEntity>()
-            .Where(ge => ge.Skills.Count(skl => skl.skillType == skill.skillType) > 0).Any();
+        // TODO: factor in range, obscurity (fog-of-war/visibility), and mistake chance,
+        // all modulated by mental/perception stats. Currently this is a pure max-skill-level search.
+
+        // var candidateInteractionGoals = FindObjectsOfType<GameEntity>()
+        //     .Where(ge => ge != this)
+        //     .Where(ge => ge.Skills.Any(skl => skl.skillType == skill.skillType))
+        //     .ToList();
         
-        if (!any)
+        var candidateInteractionGoals = new List<GameEntity>();
+
+        var x = FindObjectsOfType<GameEntity>();
+        
+        foreach (var ge in x)
+        {
+            if (ge == this)
+                continue;
+
+            if (ge.Skills.Any(skl => skl.skillType == skill.skillType))
+                candidateInteractionGoals.Add(ge);
+        }
+
+        if (candidateInteractionGoals.Count == 0)
             return null;
 
-        //todo : check : we are excluding ousrselves , check this again
-        var candidateInteractionGoals = FindObjectsOfType<GameEntity>()
-            .Where(ge => ge.Skills.Count(skl => skl.skillType == skill.skillType) > 0).Where(ge => ge != this).ToList();
+        GameEntity maxGameEntity = null;
+        int maxSkillValue = int.MinValue;
 
-        var maxGameEntity = candidateInteractionGoals[0];
-        var maxSkillValue = maxGameEntity.Skills.Find(skl => skl.skillType == skill.skillType).skillLevel;
-        foreach (GameEntity g in candidateInteractionGoals)
+        foreach (var g in candidateInteractionGoals)
         {
-            var gSkillLevel = g.Skills.Find(skl => skl.skillType == skill.skillType).skillLevel;
-            if ( gSkillLevel > maxSkillValue)
+            var matchingSkill = g.Skills.Find(skl => skl.skillType == skill.skillType);
+            //if (matchingSkill == null)
+                //continue; // defensive: shouldn't happen given the filter above, but Skills could mutate between filter and lookup
+
+            if (matchingSkill.skillLevel > maxSkillValue)
             {
                 maxGameEntity = g;
-                maxSkillValue = gSkillLevel;
+                maxSkillValue = matchingSkill.skillLevel;
             }
         }
-        
+
         return maxGameEntity;
     }
     
