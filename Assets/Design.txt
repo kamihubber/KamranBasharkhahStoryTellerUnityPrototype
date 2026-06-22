@@ -1,4 +1,14 @@
-﻿* roadmap for shine!
+﻿emergant
+-disappoint and quit on a subject/target when not doing good (advanced : replanning , new strategy, new goal path)
+probably needs an goal,target,act scoring system
+based on/connect with traits,skills... 
+
+
+- repeat fix 
+  ** - distraction(need , act based on emergant factor) 
+  ** - changes over time
+
+* roadmap for shine!
 - better world design(configs,people,envoirment)
 - emergant
 - changes over time : acts effects on mental state,traits,skills

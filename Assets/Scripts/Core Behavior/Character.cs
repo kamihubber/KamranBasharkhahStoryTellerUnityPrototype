@@ -371,7 +371,7 @@ public class Character : GameEntity
              {
                  if (comp == null)
                  {
-                     Body.ShowDialougeBaloon($"i am trying to ract to {other} by {actConfig.Name}ing them");
+                     Body.ShowDialougeBaloon($"i am trying to react to {other} by {actConfig.Name}ing them");
                  }
                  else
                  {
@@ -391,6 +391,7 @@ public class Character : GameEntity
              
              //Body.Interact(other, tempact, comp);
 
+             //react
              if (comp != null)
              {
                  await other.Interact(this, null);

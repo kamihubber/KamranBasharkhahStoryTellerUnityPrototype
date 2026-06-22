@@ -11,6 +11,8 @@ public class Body : MonoBehaviour
 
     private bool isMoving;
     [SerializeField] private float moveSpeed = 5f;
+
+    [SerializeField] private GameObject mesh;
     
     // Start is called before the first frame update
     void Start()
@@ -57,8 +59,18 @@ public class Body : MonoBehaviour
 
     private void MoveToSubject(GameObject subject)
     {
+        FaceTarget(subject);
+        
         Vector3 targetPos = subject.transform.position;
-        targetPos.x = targetPos.x - 2;
-        transform.DOMove(targetPos, 5);
+        int signRND = UnityEngine.Random.Range(0, 2) == 0 ? -1 : 1;
+        targetPos.x = targetPos.x + (Random.Range(3, 6) * signRND);
+        transform.DOMove(targetPos, 7);
+    }
+
+    private void FaceTarget(GameObject target)
+    {
+        Vector2 direction = target.transform.position - transform.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        mesh.transform.rotation = Quaternion.Euler(0, angle, 0);
     }
 }

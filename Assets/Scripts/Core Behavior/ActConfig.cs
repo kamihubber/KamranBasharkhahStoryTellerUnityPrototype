@@ -208,8 +208,19 @@ public class Act
       if (_isFailed)
          return;
       
+      //todo : try : rewise this
       OnActTryProcessUpdate?.Invoke(this);
+      
+      
+      float minVisibleTime = 2.2f; // seconds, tweak to taste
+      float elapsed = 0f;
+      while (elapsed < minVisibleTime)
+      {
+         elapsed += Time.deltaTime;
+         await Task.Yield();
+      }
       //Debug.Log("trying");
+      //
       
       //are we ignoring subacts results?!
       //todo : shouldnt subacts and gainskills be done outside act performnce(log) ?
