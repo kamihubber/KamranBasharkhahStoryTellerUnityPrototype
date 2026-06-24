@@ -1,57 +1,37 @@
-﻿interact base core
-- subject qualifications for an act,what does a woman want/expects for being proposed?
+﻿new phase note
+acceptable non-emergant base core achieved , looking for improvements and then emergant
+06222026
 
-emergant : distraction
--refacotr ? ; move gainskill and subacts outside act.log ,( this probably results in parrallell lists of tasks which is good for disstraction)
+minimum improvements
 
-emergant : distraction
-- isprocessing for each need -> need distraction
+(- seek range? -> for now can be just a simple list randomize)
+- (header) acts subject qualification
 
-emergant : distraction + Refactor
-* important , check
-- (concurrency + distract + loop crash fix : having a list of tasks for each need -> each seeking skill adds a record of act,target,reason -> then go through list 
--> distraction can cause unplanned switches among need action lists,can be based on traits)
+- objective skill vs subjective skill? 
+- required skill vs elements?
 
-interact base core + emergant
-- last state : we are creating a list of candidate acts for interact and picking the first one which is not null
-, next : we add false/mistake factor (casued by lots of things from envoirment effect to tratis , decisions , randomness....)
-and then we add this factor to our index of choose in the candidates list(or something like that) to CREATE EMERGANT.  
+- header act vas interact , should every act be an interact?
 
-interact base core
-- act -> subject required skills vs act.requiredskills??
+- what should be in goap strategy ?
 
-- * additional goap stategy?
--what should or should not be in strategy? does goap strategy need seeking , finding subject or any other strategy ?
+- simple owner things
 
-interact base core
-(- * subject skills vs object skills, this might be in tight connection with "owners of things"
-  also , how to seprate subject skills , elements vs skills , ...)
- 
- emergant
-- gained skill should be added  ??  
- 
- code design
-- finding target for an act other than interact target??
- - consider final intention (probably current need) in seeking ??
-
--? story mode ? logs
-
-- bug : seems that there is a problem with async/await timings
-
-(- refactor : ingame log panel)
-
-- feature * : differ between skill and element
-
-- iteraction responses
-
-- seek and interact
-
-  - based on mental (physical) state , envoirmental , and ranodom factors seek
-    - a range factor
-    -a obscure factor
-    - a mistake factor
-    - all affected by mental factors
-    
+new branch
+New Goap Strategy(emergant/score)
+ -* apply scoring(seems already have something)
+  -apply emergant factor (randomness , mental satte, mistake,traits,genome)
+  - distractins
   
-  - each interact timiong ? dfn
+  - envoirment (effects,...)?
   
+  -changes
+   -feedbacks from acts
+   - update skills,traits... over time
+   
+  -(simple need distraction) 
+  
+  - emergant factor effect on seek process
+  
+  
+future refactors
+- async/await bugs
