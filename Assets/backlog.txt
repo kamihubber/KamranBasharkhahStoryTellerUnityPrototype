@@ -42,10 +42,6 @@ interact base core
 
 - feature * : differ between skill and element
 
-temp for motiv : sun and land , interactions responses
-temp for motiv : moving to places
-temp for motiv : character visuals and moves
-
 - iteraction responses
 
 - seek and interact
@@ -56,6 +52,6 @@ temp for motiv : character visuals and moves
     - a mistake factor
     - all affected by mental factors
     
-  - interact
-  - each interact timiong ?
-  - traits ?
+  
+  - each interact timiong ? dfn
+  

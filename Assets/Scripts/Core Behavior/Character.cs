@@ -415,6 +415,7 @@ public class Character : GameEntity
     private async Task<ComponentSeekResult> Seek(SkillComp skill)
     {
         Debug.Log(name + "is seeking " + skill.skillName);
+        Body.ShowDialougeBaloon($"I am looking for a {skill.skillName}");
         
         var targetOwner = SearchInteractionTargets(skill);
 

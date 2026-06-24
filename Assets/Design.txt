@@ -20,6 +20,7 @@ based on/connect with traits,skills...
 
 
 - we can have "Mental Domain" and "Act Domain" both in technical and game design.
+
 - the concept of "obstacles" against any act step (specialy in a act chain toward the goal) 
 this can make the character to change its step or add another external step to its chain to first cope with that setback
 

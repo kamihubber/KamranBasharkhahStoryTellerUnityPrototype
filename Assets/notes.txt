@@ -1,4 +1,34 @@
-﻿06102026
+﻿new phase note
+acceptable non-emergant base core achieved , looking for improvements and then emergant
+06222026
+
+minimum improvements
+- seek range? -> for now can be just a simple list randomize
+- (header) acts subject qualification
+- objective skill vs subjective skill? 
+- required skill vs elements?
+- async/await bugs
+- envoirment (effects,...)?
+- header act vas interact , should every act be an interact?
+- what should be in goap strategy ?
+- simple owner things
+
+new branch
+New Goap Strategy(emergant/score)
+ -* apply scoring(seems already have something)
+  -apply emergant factor (randomness , mental satte, mistake,traits,genome)
+  - distractins
+  -changes
+   -fedbacks from acts
+   - update skills,traits... over time
+  -(simple need distraction) 
+  
+  - emergant factor effect on seek process
+  
+
+
+
+06102026
 //warning : loop stuck crash fix for now ! added a list(chain) of acts being called in chain  to provide skills for aa top act
               // and exclude repeated ones to avoid a loop
               
