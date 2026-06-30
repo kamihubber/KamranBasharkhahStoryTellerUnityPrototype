@@ -1,4 +1,14 @@
-﻿emergant
+﻿(- like minecraft everything is made of (probably limited recipies) elements
+- feelings
+- personal perspective/mindset/belief facotr : a number affecting other values (love in my opinioon : love * factor) => different perspective of one concept
+
+- seek : act or entity : my personal state,character might affect desicions before randomization
+
+- doing acts to themeselves
+)
+
+
+emergant
 -disappoint and quit on a subject/target when not doing good (advanced : replanning , new strategy, new goal path)
 probably needs an goal,target,act scoring system
 based on/connect with traits,skills... 

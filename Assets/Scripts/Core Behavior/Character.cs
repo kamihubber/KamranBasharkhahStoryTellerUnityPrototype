@@ -201,13 +201,16 @@ public class Character : GameEntity
 
             GameEntity actSubject = null;
             //move this to goap strategy?
+            //2 options
+            //acts have elements
+            //acts have subjective components which should be matched
             if (task.Value.NeedsSubject)
             {
                 //find
                 //get the primary required skill
                 SkillComp max;
-                max = task.Value.RequiredSkills[0];
-                foreach (var cs in task.Value.RequiredSkills)
+                max = task.Value.SubjectRequiedSkills[0];
+                foreach (var cs in task.Value.SubjectRequiedSkills)
                 {
                     if (cs.skillLevel > max.skillLevel)
                         max = cs;

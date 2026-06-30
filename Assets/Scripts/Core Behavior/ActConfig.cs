@@ -88,10 +88,17 @@ public class ActConfig : ScriptableObject
       set => needsSubject = value;
    }
 
+   public List<SkillComp> SubjectRequiredSkills
+   {
+      get => subjectRequiredSkills;
+      set => subjectRequiredSkills = value;
+   }
+
    [SerializeField] private float requiredTimeSeconds;
    [SerializeField] private float fullFillAmount;
    
    [SerializeField] List<SkillComp> requiredSkills = new List<SkillComp>();
+   [SerializeField] List<SkillComp> subjectRequiredSkills = new List<SkillComp>();
    [SerializeField] List<SkillComp> providingSkills = new List<SkillComp>();
    
    [SerializeField] List<SkillComp> components = new List<SkillComp>();
@@ -145,6 +152,7 @@ public class Act
    
    List<SkillComp> components = new List<SkillComp>();
    List<SkillComp> requiedSkills = new List<SkillComp>();
+   List<SkillComp> subjectRequiedSkills = new List<SkillComp>();
    List<SkillComp> providingSkills = new List<SkillComp>();
 
    public event Func<Act, Task<bool>> OnRequestGainSkills;
@@ -165,6 +173,12 @@ public class Act
    {
       get => needsSubject;
       set => needsSubject = value;
+   }
+
+   public List<SkillComp> SubjectRequiedSkills
+   {
+      get => subjectRequiedSkills;
+      set => subjectRequiedSkills = value;
    }
 
    public Act(ActConfig config, string name, Act parentAct, GameEntity subject = null)
@@ -188,6 +202,7 @@ public class Act
       components = config.Components;
       requiedSkills = config.RequiredSkills;
       providingSkills = config.ProvidingSkills;
+      subjectRequiedSkills = config.SubjectRequiredSkills;
 
    }
 

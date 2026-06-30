@@ -1,4 +1,12 @@
-﻿06102026
+﻿-for now : header target/act target choose problem :
+  - based on act => check act subject required/prefered elements + every act has a pair of objective&subjective elements
+    *- check how acts effects on subjects(either in head act or interact),can be done in emergant phase tho
+  - based on need : split need to elements -> seek person -> then seek act , like interact
+
+- in a full simulation mode , we probably divide even (everything) needs to concluding elements , analyze them and decide
+for now it might be better to have a semi simulated mode 
+
+06102026
 //warning : loop stuck crash fix for now ! added a list(chain) of acts being called in chain  to provide skills for aa top act
               // and exclude repeated ones to avoid a loop
               
